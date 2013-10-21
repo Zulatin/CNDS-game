@@ -8,7 +8,7 @@ public class game
 {
 	public static ArrayList<Player> players;
 	public static Player me;
-
+	//Test commit!
 	 public static void main(String[] args) throws Exception
 	{
 		System.out.println("Indtast dit spillernavn");

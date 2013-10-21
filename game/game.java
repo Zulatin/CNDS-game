@@ -9,7 +9,7 @@ public class game
 	public static ArrayList<Player> players;
 	public static Player me;
 
-	public static void main(String[] args) throws Exception
+	 public static void main(String[] args) throws Exception
 	{
 		System.out.println("Indtast dit spillernavn");
 		BufferedReader bName = new BufferedReader(new InputStreamReader(System.in));

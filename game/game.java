@@ -8,8 +8,6 @@ public class game
 {
 	public static ArrayList<Player> players;
 	public static Player me;
-	
-	//Test af commit
 
 	public static void main(String[] args) throws Exception
 	{

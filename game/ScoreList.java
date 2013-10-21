@@ -8,9 +8,6 @@ import javax.swing.JLabel;
 
 public class ScoreList extends JFrame
 {
-	/**
-	 * @param args
-	 */
 	ArrayList<Player> players;
 
 	// Player me;

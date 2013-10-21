@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class Client {
+	
+	public static void main(String[] args)throws Exception {
+		
+	}
 
 	public static void main(String[] args) throws IOException{
 		System.out.println("Input player name");

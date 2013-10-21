@@ -1,55 +1,57 @@
 package game;
 
 public class Player {
-String name;
-int xpos;
-int ypos;
-int point;
-String direction;
+	String name;
+	int xpos;
+	int ypos;
+	int point;
+	String direction;
 
-public Player (String name) {
-	this.name = name;
-	xpos = 5;
-	ypos = 7;
-	point = 0;
-	direction = "up";
-}
-public int getPoint() {
-	return point;
-}
+	public Player(String name) {
+		this.name = name;
+		xpos = 5;
+		ypos = 7;
+		point = 0;
+		direction = "up";
+	}
 
-public int getXpos() {
-	return xpos;
-}
+	public int getPoint() {
+		return point;
+	}
 
-public void setXpos(int xpos) {
-	this.xpos = xpos;
-}
+	public int getXpos() {
+		return xpos;
+	}
 
-public int getYpos() {
-	return ypos;
-}
+	public void setXpos(int xpos) {
+		this.xpos = xpos;
+	}
 
-public void setYpos(int ypos) {
-	this.ypos = ypos;
-}
-public String getDirection() {
-	return direction;
-}
+	public int getYpos() {
+		return ypos;
+	}
 
-public void setDirection(String direction) {
-	this.direction = direction;
-}
+	public void setYpos(int ypos) {
+		this.ypos = ypos;
+	}
 
-String ToString () {
-	return name + "   " + point;
-}
-void addOnePoint() {
-	
-	point ++;
-}
+	public String getDirection() {
+		return direction;
+	}
 
-void subOnePoint() {
-	point --;
-}
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	String ToString() {
+		return name + "   " + point;
+	}
+
+	void addOnePoint() {
+		point++;
+	}
+
+	void subOnePoint() {
+		point--;
+	}
 }

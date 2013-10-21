@@ -5,24 +5,28 @@ import java.awt.event.KeyListener;
 
 public class KeyClass implements KeyListener
 {
-	private gameplayer g;
+	private gameplayer gameplayer;
 
-	public KeyClass(gameplayer g) {
-		this.g = g;
+	public KeyClass(gameplayer gameplayer) {
+		this.gameplayer = gameplayer;
 	}
 
-	public void keyPressed(KeyEvent ke) {
-		if (ke.getKeyCode() == ke.VK_UP) {
-			g.PlayerMoved("up");
+	public void keyPressed(KeyEvent theKeyEvent) {
+		if (theKeyEvent.getKeyCode() == KeyEvent.VK_UP)
+		{
+			gameplayer.PlayerMoved("up");
 		}
-		if (ke.getKeyCode() == ke.VK_DOWN) {
-			g.PlayerMoved("down");
+		if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			gameplayer.PlayerMoved("down");
 		}
-		if (ke.getKeyCode() == ke.VK_LEFT) {
-			g.PlayerMoved("left");
+		if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			gameplayer.PlayerMoved("left");
 		}
-		if (ke.getKeyCode() == ke.VK_RIGHT) {
-			g.PlayerMoved("right");
+		if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			gameplayer.PlayerMoved("right");
 		}
 	}
 

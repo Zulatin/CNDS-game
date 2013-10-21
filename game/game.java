@@ -28,7 +28,7 @@ public class game
 		ScoreList scoreList = new ScoreList(players);
 		scoreList.setVisible(true);
 
-		// Spawn new player - thats you
+		// Gameplayet
 		new gameplayer(me, scoreList, players);
 	}
 }

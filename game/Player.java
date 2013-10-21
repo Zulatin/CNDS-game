@@ -1,5 +1,6 @@
 package game;
 
+
 public class Player {
 	String name;
 	int xpos;

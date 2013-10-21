@@ -1,7 +1,18 @@
+# Package Files #
+*.jar
+*.war
+*.ear
+
+
+*.classpath
+/META-INF
 .project
-game/KeyClass.class
-game/Player.class
-game/ScoreList.class
-game/Screen.class
-game/game.class
-game/gameplayer.class
+.settings
+.projects
+RemoteSystemsTempFiles
+.metadata
+.DS_Store
+
+
+.project
+game/*.class

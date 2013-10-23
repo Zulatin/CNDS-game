@@ -6,26 +6,24 @@ import java.io.DataOutputStream;
 
 public class Player {
 	String name;
-	int xpos;
-	int ypos;
-	int point;
-	String direction;
+	int xpos = 5;
+	int ypos = 7;
+	int point = 0;
+	String direction = "up";
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
 	private gameplayer board;
 
-	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, gameplayer board) {
+	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, gameplayer board)
+	{
 		this.name = name;
 		this.inFromClient = inFromClient;
 		this.outToClient = outToClient;
-		xpos = 5;
-		ypos = 7;
-		point = 0;
-		direction = "up";
 		this.board = board;
 	}
 
-	public Player(String name, int score){
+	public Player(String name, int score)
+	{
 		this.name = name;
 		this.point = score;
 	}

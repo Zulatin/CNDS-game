@@ -44,8 +44,10 @@ public class game
 		// Set screen, because gameplayer needs to known screen, or else players wont move
 		gp.setScreen(screen);
 
+
 		// Add key listener - on keyClass
 		screen.addKeyListener(new KeyClass(gp, me));
+
 
 		// Draw player
 		screen.drawPlayer(me);

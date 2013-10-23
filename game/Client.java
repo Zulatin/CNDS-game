@@ -40,7 +40,6 @@ public class Client {
 				p.setYpos(Integer.parseInt(settings[index+2]));
 				p.setDirection(settings[index+4]);
 				players.add(p);
-				if (p.getName().equals(inFromUser)) me = p;
 			}
 			
 			// Create a scorelist
@@ -48,11 +47,11 @@ public class Client {
 			scoreList.setVisible(true);
 
 			// Gameplayet
-			gameplayer game = new gameplayer(me, scoreList, players);
-			
+			gameplayer game = new gameplayer(scoreList, players);
+			Screen screen = new Screen(game.getLevel());
 			
 			// IngoingClient needs gameplayer to make changes
-			IngoingClient inThread = new IngoingClient(inFromServer, game);
+			IngoingClient inThread = new IngoingClient(inFromServer, game, screen);
 			OutgoingClient outThread = new OutgoingClient();
 			
 			inThread.start();

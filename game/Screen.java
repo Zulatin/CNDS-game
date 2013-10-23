@@ -27,27 +27,24 @@ public class Screen extends JFrame
 		this.setAlwaysOnTop(true);
 	}
 
-	public void movePlayerOnScreen(int x, int y, String playerDirection, Player player)
-	{
-		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/Gulv2.png"));
-
-		if (playerDirection.equals("right")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
-		}
-		if (playerDirection.equals("left")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/Heltvenstre.png"));
-		}
-		if (playerDirection.equals("up")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltOp.png"));
-		}
-		if (playerDirection.equals("down")) {
-			labels[x][y].setIcon(new ImageIcon("./Image/HeltNed.png"));
-		}
-	}
-
 	public void drawPlayer(Player player)
 	{
-		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/HeltOp.png"));
+		String playerDirection = player.getDirection();
+		String playerImage = "";
+		
+		if (playerDirection.equals("right")) {
+			playerImage = "./Image/Helthoejre.png";
+		}
+		if (playerDirection.equals("left")) {
+			playerImage = "./Image/Heltvenstre.png";
+		}
+		if (playerDirection.equals("up")) {
+			playerImage = "./Image/HeltOp.png";
+		}
+		if (playerDirection.equals("down")) {
+			playerImage = "./Image/HeltNed.png";
+		}
+		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));
 	}
 
 	public void draw()

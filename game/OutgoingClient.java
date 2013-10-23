@@ -15,6 +15,7 @@ public class OutgoingClient extends Thread
 
 	public void run()
 	{
+		System.out.println("test");
 		boolean connected = true;
 		while (connected)
 		{

@@ -16,7 +16,7 @@ public class Client
 		BufferedReader username = new BufferedReader(new InputStreamReader(System.in));
 
 		// Start connection to server
-		Socket clientSocket = new Socket("192.168.1.1", 7531);
+		Socket clientSocket = new Socket("169.254.6.76", 7531);
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -28,6 +28,7 @@ public class Client
 		// If server is not full
 		if (!response.equals("Server full"))
 		{
+			System.out.println(response);
 			int index = 0;
 			String[] settings = response.split(";");
 			ArrayList<Player> players = new ArrayList<Player>();
@@ -39,6 +40,7 @@ public class Client
 				p.setYpos(Integer.parseInt(settings[index+2]));
 				p.setDirection(settings[index+4]);
 				players.add(p);
+				System.out.println(""+p.getName());
 			}
 
 			// Create a scorelist
@@ -55,7 +57,9 @@ public class Client
 			OutgoingClient outThread = new OutgoingClient(outToServer);
 
 			// Key listener
+			System.out.println("før");
 			new KeyClass(outThread);
+			System.out.println("efter");
 
 			inThread.start();
 			outThread.start();

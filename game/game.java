@@ -44,7 +44,7 @@ public class game
 		gp.setScreen(screen);
 
 		// Add key listener - on keyClass
-		screen.addKeyListener(new KeyClass(gp, me, 1));
+		screen.addKeyListener(new KeyClass(gp, me));
 
 		// Draw player
 		screen.drawPlayer(me);

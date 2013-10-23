@@ -2,8 +2,10 @@ package game;
 
 public class OutgoingServer extends Thread{
 	
-	public OutgoingServer(){
-		
+	private Player player;
+	
+	public OutgoingServer(Player player){
+		this.player = player;
 	}
 	
 	public void run(){

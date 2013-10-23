@@ -1,5 +1,8 @@
 package game;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+
 
 public class Player {
 	String name;
@@ -7,13 +10,28 @@ public class Player {
 	int ypos;
 	int point;
 	String direction;
+	private BufferedReader inFromClient;
+	private DataOutputStream outToClient;
+	private gameplayer board;
 
-	public Player(String name) {
+	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, gameplayer board) {
 		this.name = name;
+		this.inFromClient = inFromClient;
+		this.outToClient = outToClient;
 		xpos = 5;
 		ypos = 7;
 		point = 0;
 		direction = "up";
+		this.board = board;
+	}
+	
+	public Player(String name, int score){
+		this.name = name;
+		this.point = score;
+	}
+	
+	public gameplayer getBoard() {
+		return board;
 	}
 
 	public int getPoint() {
@@ -42,6 +60,18 @@ public class Player {
 
 	public void setDirection(String direction) {
 		this.direction = direction;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public BufferedReader getInFromClient() {
+		return inFromClient;
+	}
+
+	public DataOutputStream getOutToClient() {
+		return outToClient;
 	}
 
 	String ToString() {

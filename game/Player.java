@@ -24,12 +24,17 @@ public class Player {
 		direction = "up";
 		this.board = board;
 	}
-	
+
 	public Player(String name, int score){
 		this.name = name;
 		this.point = score;
 	}
-	
+
+	public Player(String name)
+	{
+		this.name = name;
+	}
+
 	public gameplayer getBoard() {
 		return board;
 	}
@@ -61,11 +66,11 @@ public class Player {
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public BufferedReader getInFromClient() {
 		return inFromClient;
 	}

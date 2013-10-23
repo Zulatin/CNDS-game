@@ -50,7 +50,6 @@ public class gameplayer
 
 	public void PlayerMoved(String direction, Player player)
 	{
-		System.out.println(direction);
 		player.direction = direction;
 		int x = player.getXpos(), y = player.getYpos();
 

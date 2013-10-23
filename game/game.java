@@ -41,6 +41,7 @@ public class game
 		// Set screen to be visible
 		screen.setVisible(true);
 
+		// Set screen, because gameplayer needs to known screen, or else players wont move
 		gp.setScreen(screen);
 
 		// Add key listener - on keyClass

@@ -1,11 +1,16 @@
 package game;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class OutgoingClient extends Thread
 {
+	private DataOutputStream outToServer;
 	private String request;
 
-	public OutgoingClient()
+	public OutgoingClient(DataOutputStream outToServer)
 	{
+		this.outToServer = outToServer;
 	}
 
 	public void run()
@@ -13,7 +18,13 @@ public class OutgoingClient extends Thread
 		boolean connected = true;
 		while (connected)
 		{
-
+			if(request.length() > 0)
+			{
+				try {
+					this.outToServer.writeBytes(this.getRequest() + '\n');
+					this.clearRequest();
+				} catch (IOException e) {}
+			}
 		}
 	}
 

@@ -48,10 +48,14 @@ public class Client
 			// Gameplayet
 			gameplayer game = new gameplayer(scoreList, players);
 			Screen screen = new Screen(game.getLevel());
+			screen.setVisible(true);
 
 			// IngoingClient needs gameplayer to make changes
 			IngoingClient inThread = new IngoingClient(inFromServer, game, screen);
-			OutgoingClient outThread = new OutgoingClient();
+			OutgoingClient outThread = new OutgoingClient(outToServer);
+
+			// Key listener
+			new KeyClass(outThread);
 
 			inThread.start();
 			outThread.start();

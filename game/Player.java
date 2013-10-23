@@ -6,10 +6,10 @@ import java.io.DataOutputStream;
 
 public class Player {
 	String name;
+	String direction = "up";
 	int xpos = 5;
 	int ypos = 7;
 	int point = 0;
-	String direction = "up";
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
 	private gameplayer board;

@@ -33,7 +33,8 @@ public class KeyClass implements KeyListener
 		}
 
 		// Press
-		gameplayer.PlayerMoved(type, player);
+		if(type != null)
+			gameplayer.PlayerMoved(type, player);
 	}
 
 	public void keyReleased(KeyEvent ke) {

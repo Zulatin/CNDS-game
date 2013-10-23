@@ -7,7 +7,8 @@ import java.util.ArrayList;
 public class game
 {
 	public static ArrayList<Player> players;
-	public static Player me;
+	public static Player me, fup;
+	static Screen screen;
 
 	public static void main(String[] args) throws Exception
 	{
@@ -19,16 +20,34 @@ public class game
 
 		// Create you
 		me = new Player(bName.readLine());
+		fup = new Player("FUP");
 
 		// Add players to play list
 		players.add(me);
-		players.add(new Player("FUP"));
+		players.add(fup);
+		fup.setYpos(10);
 
 		// Create a scorelist
 		ScoreList scoreList = new ScoreList(players);
 		scoreList.setVisible(true);
 
+
 		// Gameplayet
-		new gameplayer(me, scoreList, players);
+		gameplayer gp = new gameplayer(scoreList, players);
+
+
+		// Start new screen
+		screen = new Screen(gp.getLevel());
+		// Set screen to be visible
+		screen.setVisible(true);
+
+		gp.setScreen(screen);
+
+		// Add key listener - on keyClass
+		screen.addKeyListener(new KeyClass(gp, me, 1));
+
+		// Draw player
+		screen.drawPlayer(me);
+		screen.drawPlayer(fup);
 	}
 }

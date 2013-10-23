@@ -12,7 +12,7 @@ public class Screen extends JFrame
 
 	private String[][] level;
 
-	public Screen(String[][] level, int posX, int posY)
+	public Screen(String[][] level)
 	{
 		super("TKgame v. 1.0");
 		this.level = level;
@@ -23,13 +23,13 @@ public class Screen extends JFrame
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
-		draw(posX, posY);
+		draw();
 		this.setAlwaysOnTop(true);
 	}
 
-	public void movePlayerOnScreen(int oldX, int oldY, int x, int y, String playerDirection)
+	public void movePlayerOnScreen(int x, int y, String playerDirection, Player player)
 	{
-		labels[oldX][oldY].setIcon(new ImageIcon("./Image/Gulv2.png"));
+		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/Gulv2.png"));
 
 		if (playerDirection.equals("right")) {
 			labels[x][y].setIcon(new ImageIcon("./Image/Helthoejre.png"));
@@ -45,7 +45,12 @@ public class Screen extends JFrame
 		}
 	}
 
-	public void draw(int posX, int posY)
+	public void drawPlayer(Player player)
+	{
+		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/HeltOp.png"));
+	}
+
+	public void draw()
 	{
 		for (int j = 0; j < 20; j++)
 		{
@@ -64,6 +69,5 @@ public class Screen extends JFrame
 				}
 			}
 		}
-		labels[posX][posY].setIcon(new ImageIcon("./Image/HeltOp.png"));
 	}
 }

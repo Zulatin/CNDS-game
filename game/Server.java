@@ -52,7 +52,7 @@ public class Server {
 				}
 			}
 		}
-		else if(args[0].equals("REMOVE")){
+		else if(args[0].equals("REMOVEPLAYER")){
 			//TODO
 		}
 	}

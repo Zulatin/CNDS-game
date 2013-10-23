@@ -23,7 +23,7 @@ public class IngoingServer extends Thread{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			int x = player.getXpos(), y = player.getYpos();
 
 			if (direction.equals("right")) {
@@ -48,27 +48,19 @@ public class IngoingServer extends Thread{
 				scoreList.updateScoreOnScreenAll();
 
 			} else {
-
-				// Give player a point
 				player.addOnePoint();
-
-				// Update scorelist
 				scoreList.updateScoreOnScreenAll();
-				
-				// Move player on the board
-				//screen.movePlayerOnScreen(player.getXpos(), player.getYpos(), x, y, player.getDirection());
 				String toClient ="";
 				for (Player p: players){
 					toClient += p.getName()+";"+p.getXpos()+";"+p.getYpos()+";"+p.getPoint()+";"+p.getDirection()+";";
 				}
-				player.getOutToClient().writeBytes(toClient);
-			}
-
-				// Set players X Y on player object
-//				player.setXpos(x);
-//				player.setYpos(y);
-
+				try {
+					player.getOutToClient().writeBytes(toClient);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
 }
+

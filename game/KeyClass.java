@@ -5,12 +5,11 @@ import java.awt.event.KeyListener;
 
 public class KeyClass implements KeyListener
 {
-	private gameplayer gameplayer;
-	private Player player;
+	private OutgoingClient outClient;
 
-	public KeyClass(gameplayer gameplayer, Player player) {
-		this.gameplayer = gameplayer;
-		this.player = player;
+	public KeyClass(OutgoingClient outClient)
+	{
+		this.outClient = outClient;
 	}
 
 	public void keyPressed(KeyEvent theKeyEvent) {
@@ -34,7 +33,7 @@ public class KeyClass implements KeyListener
 
 		// Press
 		if(type != null)
-			gameplayer.PlayerMoved(type, player);
+			this.outClient.sendKey(type);
 	}
 
 	public void keyReleased(KeyEvent ke) {

@@ -16,8 +16,10 @@ public class IngoingServer extends Thread{
 		this.players = new ArrayList<Player>(players);
 	}
 
-	public void run(){
-		while(true){
+	public void run()
+	{
+		while(true)
+		{
 			try {
 				direction = player.getInFromClient().readLine();
 			} catch (IOException e) {
@@ -40,7 +42,8 @@ public class IngoingServer extends Thread{
 			}
 
 			String[][] level = player.getBoard().getLevel();
-			if (level[x][y].equals(wall)){
+			if (level[x][y].equals(wall))
+			{
 
 				// Take a point from player
 				player.subOnePoint();
@@ -48,19 +51,21 @@ public class IngoingServer extends Thread{
 				scoreList.updateScoreOnScreenAll();
 
 			} else {
+
 				player.addOnePoint();
 				scoreList.updateScoreOnScreenAll();
-				String toClient ="";
-				for (Player p: players){
-					toClient += p.getName()+";"+p.getXpos()+";"+p.getYpos()+";"+p.getPoint()+";"+p.getDirection()+";";
+
+				String toClient = "";
+
+				for (Player p: players)
+				{
+					toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";
 				}
+
 				try {
 					player.getOutToClient().writeBytes(toClient);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				} catch (IOException e) {}
 			}
 		}
 	}
 }
-

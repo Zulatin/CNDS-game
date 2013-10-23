@@ -12,7 +12,7 @@ public class Server {
 	private static ArrayList<Player> players;
 	private static gameplayer board;
 	private static ScoreList scoreList;
-	
+
 	public static void main(String[] args)throws Exception {
 		players = new ArrayList<Player>();
 		scoreList = new ScoreList(players);
@@ -23,26 +23,25 @@ public class Server {
 		ServerSocket welcomeSocket = new ServerSocket(7531);
 
 		IngoingServer in;
-		OutgoingServer out;
 		BufferedReader inFromClient;
-		
+
 		while(true){
 			Socket connectionSocket = welcomeSocket.accept();
 			outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			clientSentence = inFromClient.readLine();
-			
+
 			checkPlayer(clientSentence, inFromClient, outToClient);
 		}
 	}
-	
+
 	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException{
 		String[] args = action.split(";");
 		if(args[0].equals("ADDPLAYER")){
 			Player player = new Player(args[1], br, dos, board);
 			players.add(player);
 			IngoingServer in = new IngoingServer(player, players, scoreList);
-//			OutgoingServer out = new OutgoingServer(player);
+			//			OutgoingServer out = new OutgoingServer(player);
 			sendPlayers(dos);
 		}
 		else if(args[0].equals("MOVEPLAYER")){
@@ -56,7 +55,7 @@ public class Server {
 			//TODO
 		}
 	}
-	
+
 	public static void sendPlayers(DataOutputStream dos) throws IOException{
 		String toClient ="";
 		for (Player p: players){

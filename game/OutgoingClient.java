@@ -1,14 +1,16 @@
 package game;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class OutgoingClient extends Thread
 {
-	private int y;
-	private int x;
+	private DataOutputStream outToServer;
 	private String request;
 
-	public OutgoingClient()
+	public OutgoingClient(DataOutputStream outToServer)
 	{
-
+		this.outToServer = outToServer;
 	}
 
 	public void run()
@@ -16,7 +18,13 @@ public class OutgoingClient extends Thread
 		boolean connected = true;
 		while (connected)
 		{
-
+			if(request.length() > 0)
+			{
+				try {
+					this.outToServer.writeBytes(this.getRequest() + '\n');
+					this.clearRequest();
+				} catch (IOException e) {}
+			}
 		}
 	}
 
@@ -92,5 +100,16 @@ public class OutgoingClient extends Thread
 
 		// Format request
 		formatRequest("REMOVEPLAYER", name);
+	}
+
+
+	/**
+	 * Send key
+	 */
+
+	public void sendKey(String key)
+	{
+		// Format request
+		formatRequest("KEY", key);
 	}
 }

@@ -2,13 +2,10 @@ package game;
 
 public class OutgoingClient extends Thread
 {
-	private int y;
-	private int x;
 	private String request;
 
 	public OutgoingClient()
 	{
-
 	}
 
 	public void run()
@@ -92,5 +89,16 @@ public class OutgoingClient extends Thread
 
 		// Format request
 		formatRequest("REMOVEPLAYER", name);
+	}
+
+
+	/**
+	 * Send key
+	 */
+
+	public void sendKey(String key)
+	{
+		// Format request
+		formatRequest("KEY", key);
 	}
 }

@@ -25,6 +25,11 @@ public class Player {
 		this.board = board;
 	}
 	
+	public Player(String name, int score){
+		this.name = name;
+		this.point = score;
+	}
+	
 	public gameplayer getBoard() {
 		return board;
 	}

@@ -30,6 +30,7 @@ public class Server {
 			outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			clientSentence = inFromClient.readLine();
+			System.out.println(clientSentence);
 
 			checkPlayer(clientSentence, inFromClient, outToClient);
 		}
@@ -40,8 +41,11 @@ public class Server {
 		if(args[0].equals("ADDPLAYER")){
 			Player player = new Player(args[1], br, dos, board);
 			players.add(player);
+			System.out.println(players.size());
 			IngoingServer in = new IngoingServer(player, players, scoreList);
+			in.start();
 			//			OutgoingServer out = new OutgoingServer(player);
+			System.out.println("ingoing server thread");
 			sendPlayers(dos);
 		}
 		else if(args[0].equals("MOVEPLAYER")){
@@ -61,6 +65,7 @@ public class Server {
 		for (Player p: players){
 			toClient += p.getName()+";"+p.getXpos()+";"+p.getYpos()+";"+p.getPoint()+";"+p.getDirection()+";";
 		}
-		dos.writeBytes(toClient);
+		System.out.println(toClient);
+		dos.writeBytes(toClient + '\n');
 	}
 }

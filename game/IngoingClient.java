@@ -9,6 +9,7 @@ public class IngoingClient extends Thread
 	private BufferedReader inFromServer;
 	private gameplayer game;
 	private Screen screen;
+	private volatile boolean connected = true;
 
 	public IngoingClient(BufferedReader br, gameplayer game, Screen screen)
 	{
@@ -18,37 +19,42 @@ public class IngoingClient extends Thread
 
 	public void run()
 	{
-		boolean connected = true;
-		while (connected)
+		while (this.connected)
 		{
+			System.out.println(this.connected);
 			try
 			{
 				String sentence = inFromServer.readLine();
-				System.out.println(sentence);
-				String[] boardUpdate = sentence.split(";");
-				ArrayList<Player> players = new ArrayList<Player>();
-
-				for (int i = 1; i < Integer.parseInt(boardUpdate[0])*5-4; i += 5)
+				System.out.println("FROM SERVER INGOINGCLIENT1: " + sentence);
+				if(sentence != null)
 				{
-					Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i+3]));
-					p.setXpos(Integer.parseInt(boardUpdate[i+1]));
-					p.setYpos(Integer.parseInt(boardUpdate[i+2]));
-					p.setDirection(boardUpdate[i+4]);
-					players.add(p);
-				}
+					System.out.println("FROM SERVER INGOINGCLIENT2: " + sentence);
+					String[] boardUpdate = sentence.split(";");
+					ArrayList<Player> players = new ArrayList<Player>();
 
-				// Reset board
-				for (Player p : game.players)
-				{
-					screen.unDrawPlayer(p);
-				}
-				
-				// Setup new board
-				game.players = players;
+					for(int i = 1; i < Integer.parseInt(boardUpdate[0])*5-4; i += 5)
+					{
+						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i+3]));
+						p.setXpos(Integer.parseInt(boardUpdate[i+1]));
+						p.setYpos(Integer.parseInt(boardUpdate[i+2]));
+						p.setDirection(boardUpdate[i+4]);
+						players.add(p);
+					}
 
-				for (Player p : game.players)
-				{
-					screen.drawPlayer(p);
+					// Reset board
+					for (Player p : game.players)
+					{
+						System.out.println("Resetting board");
+						screen.undrawPlayer(p);
+					}
+
+					// Setup new board
+					game.players = players;
+
+					for (Player p : game.players)
+					{
+						screen.drawPlayer(p);
+					}
 				}
 
 			} catch (IOException e) {

@@ -27,7 +27,7 @@ public class IngoingServer extends Thread{
 			}
 			if (direction != null){
 				int x = player.getXpos(), y = player.getYpos();
-				
+
 				if (direction.equals("right")) {
 					x = player.getXpos() + 1;
 				}
@@ -40,33 +40,35 @@ public class IngoingServer extends Thread{
 				if (direction.equals("down")) {
 					y = player.getYpos() + 1;
 				}
-				
+
 				String[][] level = player.getBoard().getLevel();
 				if (level[x][y].equals(wall))
 				{
-					
+
 					// Take a point from player
 					player.subOnePoint();
 					// Move player on the board
 					scoreList.updateScoreOnScreenAll();
-					
+
 				} else {
-					
+
 					player.addOnePoint();
 					scoreList.updateScoreOnScreenAll();
-					
+
 					String toClient = "";
-					
+
 					for (Player p: players)
 					{
 						toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";
 					}
-					
+
 					try {
 						player.getOutToClient().writeBytes(toClient + '\n');
-					} catch (IOException e) {}
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
-				
+
 			}
 		}
 	}

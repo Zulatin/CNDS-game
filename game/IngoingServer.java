@@ -21,7 +21,10 @@ public class IngoingServer extends Thread{
 		while(true)
 		{
 			try {
-				direction = player.getInFromClient().readLine();
+				
+				String s = player.getInFromClient().readLine();
+				String[] message = s.split(";");
+				direction = message[1];
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

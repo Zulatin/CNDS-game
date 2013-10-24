@@ -48,16 +48,7 @@ public class Server {
 			System.out.println("ingoing server thread");
 			sendPlayers(dos);
 		}
-		else if(args[0].equals("MOVEPLAYER")){
-			for(Player p : players){
-				if(p.getName().equals(args[0])){
-					//TODO
-				}
-			}
-		}
-		else if(args[0].equals("REMOVEPLAYER")){
-			//TODO
-		}
+		
 	}
 
 	public static void sendPlayers(DataOutputStream dos) throws IOException{

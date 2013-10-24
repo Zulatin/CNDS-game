@@ -24,7 +24,7 @@ public class IngoingServer extends Thread{
 		while(true)
 		{
 			System.out.println("Efter");
-			
+			 //comment
 			try {
 
 				String s = player.getInFromClient().readLine();

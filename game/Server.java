@@ -33,7 +33,7 @@ public class Server {
 			checkPlayer(clientSentence, inFromClient, outToClient);
 		}
 	}
-
+ //comment
 	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException, InterruptedException{
 		String[] args = action.split(";");
 		if(args[0].equals("ADDPLAYER")){

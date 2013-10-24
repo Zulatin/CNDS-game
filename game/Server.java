@@ -39,7 +39,7 @@ public class Server {
 	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException, InterruptedException{
 
 		String[] args = action.split(";");
-		if(args[0].equals("ADDPLAYER")){
+		if(args[0].equals("ADDPLAYER") && args[1] != null){
 			Player player = new Player(args[1], br, dos, board);
 			players.add(player);
 			System.out.println(players.size());

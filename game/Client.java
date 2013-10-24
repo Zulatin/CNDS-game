@@ -14,6 +14,7 @@ public class Client
 		// Get username
 		System.out.println("Input player name");
 		BufferedReader username = new BufferedReader(new InputStreamReader(System.in));
+		String theUsername = username.readLine();
 
 		if(username != null)
 		{
@@ -25,7 +26,7 @@ public class Client
 
 
 			// Send add player to server
-			outToServer.writeBytes("ADDPLAYER;" + username.readLine() + '\n');
+			outToServer.writeBytes("ADDPLAYER;" + theUsername + '\n');
 			// Get response from server
 			String response = inFromServer.readLine();
 

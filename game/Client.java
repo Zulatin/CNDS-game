@@ -51,7 +51,7 @@ public class Client
 
 
 			// Gameplayet
-			gameplayer game = new gameplayer(scoreList, players);
+			Gameplayer game = new Gameplayer(scoreList, players);
 			Screen screen = new Screen(game.getLevel());
 			screen.setVisible(true);
 

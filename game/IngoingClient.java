@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class IngoingClient extends Thread
 {
 	private BufferedReader inFromServer;
-	private gameplayer game;
+	private Gameplayer game;
 	private Screen screen;
 	private volatile boolean connected = true;
 
-	public IngoingClient(BufferedReader br, gameplayer game, Screen screen)
+	public IngoingClient(BufferedReader br, Gameplayer game, Screen screen)
 	{
 		this.inFromServer = br;
 		this.game = game;

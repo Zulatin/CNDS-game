@@ -40,7 +40,7 @@ public class Client
 				p.setYpos(Integer.parseInt(settings[index+2]));
 				p.setDirection(settings[index+4]);
 				players.add(p);
-				System.out.println(""+p.getName());
+				System.out.println("" + p.getName());
 			}
 
 			// Create a scorelist
@@ -54,15 +54,11 @@ public class Client
 
 			// IngoingClient needs gameplayer to make changes
 			IngoingClient inThread = new IngoingClient(inFromServer, game, screen);
-			OutgoingClient outThread = new OutgoingClient(outToServer);
 
 			// Key listener
-			System.out.println("før");
 			new KeyClass(outToServer);
-			System.out.println("efter");
 
 			inThread.start();
-			outThread.start();
 		}
 		else {
 			System.out.println("Server is full");

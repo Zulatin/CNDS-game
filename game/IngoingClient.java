@@ -33,7 +33,7 @@ public class IngoingClient extends Thread
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
-					for(int i = 1; i < Integer.parseInt(boardUpdate[0])*5-4; i += 5)
+					for(int i = 1; i < boardUpdate.length-4; i += 5)
 					{
 						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i+3]));
 						p.setXpos(Integer.parseInt(boardUpdate[i+1]));

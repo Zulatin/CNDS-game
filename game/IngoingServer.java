@@ -78,7 +78,8 @@ public class IngoingServer extends Thread{
 						}
 
 						try {
-							player.getOutToClient().writeBytes(toClient + '\n');
+							for (Player p: Server.players)
+							p.getOutToClient().writeBytes(toClient + '\n');
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

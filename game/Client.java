@@ -20,7 +20,7 @@ public class Client
 		{
 
 			// Start connection to server
-			Socket clientSocket = new Socket("10.10.133.143", 7531);
+			Socket clientSocket = new Socket("10.10.132.44", 7531);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 

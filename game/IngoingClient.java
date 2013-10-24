@@ -22,14 +22,11 @@ public class IngoingClient extends Thread
 	{
 		while (this.connected)
 		{
-			System.out.println(this.connected);
 			try
 			{
 				String sentence = inFromServer.readLine();
-				System.out.println("FROM SERVER INGOINGCLIENT1: " + sentence);
 				if(sentence != null)
 				{
-					System.out.println("FROM SERVER INGOINGCLIENT2: " + sentence);
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
@@ -42,24 +39,30 @@ public class IngoingClient extends Thread
 						players.add(p);
 					}
 
-					// Reset board
-					for (Player p : game.players)
+
+					// Reset board - player
+					for (Player player: game.players)
 					{
-						System.out.println("Resetting board");
-						screen.undrawPlayer(p);
+						// Undraw player
+						screen.undrawPlayer(player);
 					}
+
 
 					// Reset scorelist
 					this.game.scoreList.setPlayers(players);
 					this.game.scoreList.draw();
 					this.game.scoreList.updateScoreOnScreenAll();
 
+
 					// Setup new board
 					game.players = players;
 
-					for (Player p : game.players)
+
+					// Run through players
+					for (Player player: game.players)
 					{
-						screen.drawPlayer(p);
+						// Draw player
+						screen.drawPlayer(player);
 					}
 				}
 

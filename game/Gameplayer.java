@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Gameplayer
 {
-	//	Screen screen;
+	// Screen screen;
 	ArrayList<Player> players;
 	ScoreList scoreList;
 
@@ -41,5 +41,4 @@ public class Gameplayer
 	{
 		return level;
 	}
-
 }

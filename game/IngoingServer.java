@@ -74,12 +74,14 @@ public class IngoingServer extends Thread{
 						player.setYpos(y);
 						for (Player p: Server.players)
 						{
+							
 							toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";
 						}
 
 						try {
 							for (Player p: Server.players)
-							p.getOutToClient().writeBytes(toClient + '\n');
+								p.output(toClient);
+								
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

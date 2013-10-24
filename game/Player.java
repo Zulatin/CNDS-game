@@ -2,6 +2,7 @@ package game;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 
 public class Player {
@@ -87,5 +88,9 @@ public class Player {
 
 	void subOnePoint() {
 		point--;
+	}
+	
+	public synchronized void output(String toClient) throws IOException{
+		outToClient.writeBytes(toClient + '\n');
 	}
 }

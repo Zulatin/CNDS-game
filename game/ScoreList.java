@@ -27,6 +27,11 @@ public class ScoreList extends JFrame
 		this.setAlwaysOnTop(true);
 	}
 
+	public void setPlayers(ArrayList<Player> players)
+	{
+		this.players = players;
+	}
+
 	public void draw()
 	{
 		for (int j = 0; j < players.size(); j++)

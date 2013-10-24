@@ -70,7 +70,8 @@ public class IngoingServer extends Thread{
 						scoreList.updateScoreOnScreenAll();
 
 						String toClient = "";
-
+						player.setXpos(x);
+						player.setYpos(y);
 						for (Player p: players)
 						{
 							toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";

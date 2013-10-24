@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 public class Server {
 	private static ArrayList<Player> players;
-	private static gameplayer board;
+	private static Gameplayer board;
 	private static ScoreList scoreList;
 
 	public static void main(String[] args)throws Exception {
 		players = new ArrayList<Player>();
 		scoreList = new ScoreList(players);
-		board = new gameplayer(scoreList, players);
+		board = new Gameplayer(scoreList, players);
 		String clientSentence;
 		String sentence;
 		DataOutputStream outToClient;

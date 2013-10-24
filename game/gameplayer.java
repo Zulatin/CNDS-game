@@ -2,7 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
-public class gameplayer
+public class Gameplayer
 {
 	//	Screen screen;
 	ArrayList<Player> players;
@@ -31,7 +31,7 @@ public class gameplayer
 			{ "w", "e", "e", "e", "w", "e", "e", "e", "w", "w", "e", "e", "w", "e", "e", "e", "e", "e", "e", "w" },
 			{ "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w", "w" },
 		};
-	public gameplayer(ScoreList scoreList, ArrayList<Player> players)
+	public Gameplayer(ScoreList scoreList, ArrayList<Player> players)
 	{
 		this.scoreList = scoreList;
 		this.players = players;

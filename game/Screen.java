@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 public class Screen extends JFrame
 {
 	private JLabel[][] labels = new JLabel[20][20];
-
 	private String[][] level;
+
 
 	public Screen(String[][] level)
 	{
@@ -27,25 +27,6 @@ public class Screen extends JFrame
 		this.setAlwaysOnTop(true);
 	}
 
-	public void drawPlayer(Player player)
-	{
-		String playerDirection = player.getDirection();
-		String playerImage = "";
-		
-		if (playerDirection.equals("right")) {
-			playerImage = "./Image/Helthoejre.png";
-		}
-		if (playerDirection.equals("left")) {
-			playerImage = "./Image/Heltvenstre.png";
-		}
-		if (playerDirection.equals("up")) {
-			playerImage = "./Image/HeltOp.png";
-		}
-		if (playerDirection.equals("down")) {
-			playerImage = "./Image/HeltNed.png";
-		}
-		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));
-	}
 
 	public void draw()
 	{
@@ -67,9 +48,31 @@ public class Screen extends JFrame
 			}
 		}
 	}
-	
-	public void unDrawPlayer(Player player){
-		
+
+
+	public void drawPlayer(Player player)
+	{
+		String playerDirection = player.getDirection();
+		String playerImage = "";
+
+		if (playerDirection.equals("right")) {
+			playerImage = "./Image/Helthoejre.png";
+		}
+		if (playerDirection.equals("left")) {
+			playerImage = "./Image/Heltvenstre.png";
+		}
+		if (playerDirection.equals("up")) {
+			playerImage = "./Image/HeltOp.png";
+		}
+		if (playerDirection.equals("down")) {
+			playerImage = "./Image/HeltNed.png";
+		}
+		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));
+	}
+
+
+	public void undrawPlayer(Player player)
+	{
 		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/gulv2.png"));
 	}
 }

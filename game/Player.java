@@ -12,9 +12,9 @@ public class Player {
 	int point = 0;
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
-	private gameplayer board;
+	private Gameplayer board;
 
-	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, gameplayer board)
+	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, Gameplayer board)
 	{
 		this.name = name;
 		this.inFromClient = inFromClient;
@@ -33,7 +33,7 @@ public class Player {
 		this.name = name;
 	}
 
-	public gameplayer getBoard() {
+	public Gameplayer getBoard() {
 		return board;
 	}
 

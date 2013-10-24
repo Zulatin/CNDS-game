@@ -2,14 +2,16 @@ package game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class KeyClass implements KeyListener
 {
-	private OutgoingClient outClient;
+	private DataOutputStream dos;
 
-	public KeyClass(OutgoingClient outClient)
+	public KeyClass(DataOutputStream dos)
 	{
-		this.outClient = outClient;
+		this.dos = dos;
 	}
 
 	public void keyPressed(KeyEvent theKeyEvent) {
@@ -33,7 +35,11 @@ public class KeyClass implements KeyListener
 
 		// Press
 		if(type != null)
-			this.outClient.sendKey(type);
+			try {
+				dos.writeBytes("MOVEPLAYER;" + type);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 	public void keyReleased(KeyEvent ke) {

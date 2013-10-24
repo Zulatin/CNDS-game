@@ -58,7 +58,7 @@ public class Client
 
 			// Key listener
 			System.out.println("før");
-			new KeyClass(outThread);
+			new KeyClass(outToServer);
 			System.out.println("efter");
 
 			inThread.start();

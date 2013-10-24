@@ -38,7 +38,11 @@ public class IngoingClient extends Thread
 				}
 
 				// Reset board
-				screen.draw();
+				for (Player p : game.players)
+				{
+					screen.unDrawPlayer(p);
+				}
+				
 				// Setup new board
 				game.players = players;
 

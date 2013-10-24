@@ -9,9 +9,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
-	private static ArrayList<Player> players;
+	public static ArrayList<Player> players;
 	private static Gameplayer board;
-	private static ScoreList scoreList;
+	public static ScoreList scoreList;
 
 	public static void main(String[] args)throws Exception {
 		players = new ArrayList<Player>();
@@ -43,7 +43,7 @@ public class Server {
 			Player player = new Player(args[1], br, dos, board);
 			players.add(player);
 			System.out.println(players.size());
-			IngoingServer in = new IngoingServer(player, players, scoreList);
+			IngoingServer in = new IngoingServer(player);
 			in.start();
 			//			OutgoingServer out = new OutgoingServer(player);
 			System.out.println("ingoing server thread");

@@ -8,14 +8,14 @@ public class IngoingServer extends Thread{
 	private Player player;
 	private String direction = "left";
 	private String wall = "w";
-	private ScoreList scoreList;
-	private ArrayList<Player> players;
+//	private ScoreList scoreList;
+//	private ArrayList<Player> players;
 	private String command = "";
 
-	public IngoingServer(Player player, ArrayList<Player> players, ScoreList scoreList){
+	public IngoingServer(Player player){
 		this.player = player;
-		this.players = new ArrayList<Player>(players);
-		this.scoreList = scoreList;
+//		this.players = new ArrayList<Player>(players);
+//		this.scoreList = scoreList;
 	}
 
 	public void run()
@@ -62,17 +62,17 @@ public class IngoingServer extends Thread{
 						// Take a point from player
 						player.subOnePoint();
 						// Move player on the board
-						scoreList.updateScoreOnScreenAll();
+						Server.scoreList.updateScoreOnScreenAll();
 
 					} else {
 
 						player.addOnePoint();
-						scoreList.updateScoreOnScreenAll();
+						Server.scoreList.updateScoreOnScreenAll();
 
 						String toClient = "";
 						player.setXpos(x);
 						player.setYpos(y);
-						for (Player p: players)
+						for (Player p: Server.players)
 						{
 							toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";
 						}

@@ -21,8 +21,6 @@ public class Server {
 		String sentence;
 		DataOutputStream outToClient;
 		ServerSocket welcomeSocket = new ServerSocket(7531);
-
-		IngoingServer in;
 		BufferedReader inFromClient;
 
 		while(true){
@@ -36,7 +34,7 @@ public class Server {
 		}
 	}
 
-	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException{
+	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException, InterruptedException{
 		String[] args = action.split(";");
 		if(args[0].equals("ADDPLAYER")){
 			Player player = new Player(args[1], br, dos, board);
@@ -44,10 +42,12 @@ public class Server {
 			System.out.println(players.size());
 			IngoingServer in = new IngoingServer(player, players, scoreList);
 			in.start();
+			
 			//			OutgoingServer out = new OutgoingServer(player);
 			System.out.println("ingoing server thread");
 			sendPlayers(dos);
 		}
+		
 		
 	}
 

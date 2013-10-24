@@ -67,4 +67,9 @@ public class Screen extends JFrame
 			}
 		}
 	}
+	
+	public void unDrawPlayer(Player player){
+		
+		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/gulv2.png"));
+	}
 }

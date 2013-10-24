@@ -37,6 +37,7 @@ public class KeyClass implements KeyListener
 		if(type != null)
 			try {
 				dos.writeBytes("MOVEPLAYER;" + type + '\n');
+				System.out.println("MOVEPLAYER;" + type);
 			} catch (IOException e) {}
 	}
 

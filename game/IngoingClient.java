@@ -15,6 +15,7 @@ public class IngoingClient extends Thread
 	{
 		this.inFromServer = br;
 		this.game = game;
+		this.screen = screen;
 	}
 
 	public void run()

@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 public class Screen extends JFrame
 {
 	private JLabel[][] labels = new JLabel[20][20];
-
 	private String[][] level;
+
 
 	public Screen(String[][] level)
 	{

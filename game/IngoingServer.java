@@ -1,57 +1,52 @@
 package game;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class IngoingServer extends Thread{
-
+public class IngoingServer extends Thread
+{
 	private Player player;
-	private String direction = "left";
-	private String wall = "w";
-//	private ScoreList scoreList;
-//	private ArrayList<Player> players;
-	private String command = "";
+	private String command = "", content = "left", wall = "w";
 
-	public IngoingServer(Player player){
+	public IngoingServer(Player player)
+	{
 		this.player = player;
-//		this.players = new ArrayList<Player>(players);
-//		this.scoreList = scoreList;
 	}
 
 	public void run()
 	{
 		while(true)
 		{
-			System.out.println("Efter");
+			try
+			{
 
-			try {
+				// Get clients message
+				String[] message = player.getInFromClient().readLine().split(";");
 
-				String s = player.getInFromClient().readLine();
-				System.out.println(s);
-				String[] message = s.split(";");
-				direction = message[1];
+				// Get command and content
 				command = message[0];
-				
+				content = message[1];
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if (command.equals("REMOVEPLAYER")){
 
-			}
-			if (command.equals("MOVEPLAYER")){
-				if (direction != null){
+			// Check if content is not null
+			if(content != null)
+			{
+				if (command.equals("MOVEPLAYER"))
+				{
 					int x = player.getXpos(), y = player.getYpos();
 
-					if (direction.equals("right")) {
+					if (content.equals("right")) {
 						x = player.getXpos() + 1;
 					}
-					if (direction.equals("left")) {
+					if (content.equals("left")) {
 						x = player.getXpos() - 1;
 					}
-					if (direction.equals("up")) {
+					if (content.equals("up")) {
 						y = player.getYpos() - 1;
 					}
-					if (direction.equals("down")) {
+					if (content.equals("down")) {
 						y = player.getYpos() + 1;
 					}
 
@@ -61,31 +56,45 @@ public class IngoingServer extends Thread{
 
 						// Take a point from player
 						player.subOnePoint();
-						// Move player on the board
+						// Update score board
 						Server.scoreList.updateScoreOnScreenAll();
 
 					} else {
 
+						// Add point to player
 						player.addOnePoint();
+						// Update score board
 						Server.scoreList.updateScoreOnScreenAll();
 
+						// Create string being sent to client
 						String toClient = "";
+
+						// Update players positions
 						player.setXpos(x);
 						player.setYpos(y);
-						for (Player p: Server.players)
+
+						// Run through players
+						for (Player player: Server.players)
 						{
-							
-							toClient += p.getName() + ";" + p.getXpos() + ";" + p.getYpos() + ";" + p.getPoint() + ";" + p.getDirection() + ";";
+							toClient = player.getName() + ";" + player.getXpos() + ";" + player.getYpos() + ";" + player.getPoint() + ";" + player.getDirection() + ";";
 						}
 
-						try {
-							for (Player p: Server.players)
-								p.output(toClient);
-								
+						try
+						{
+							// Run through players
+							for (Player player: Server.players)
+							{
+								player.output(toClient);
+							}
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
+				}
+
+
+				if (command.equals("REMOVEPLAYER"))
+				{
 
 				}
 			}

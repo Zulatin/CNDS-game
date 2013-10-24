@@ -89,8 +89,9 @@ public class Player {
 	void subOnePoint() {
 		point--;
 	}
-	
-	public synchronized void output(String toClient) throws IOException{
+
+	public synchronized void output(String toClient) throws IOException
+	{
 		outToClient.writeBytes(toClient + '\n');
 	}
 }

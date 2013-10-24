@@ -49,6 +49,9 @@ public class IngoingClient extends Thread
 						screen.undrawPlayer(p);
 					}
 
+					// Reset scorelist
+					this.game.scoreList.updateScoreOnScreenAll();
+
 					// Setup new board
 					game.players = players;
 

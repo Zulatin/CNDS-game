@@ -18,7 +18,7 @@ public class ScoreList extends JFrame
 		super("TKgame v. 1.0");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(600, 100);
-		this.setSize(100, 500);
+		this.setSize(175, 500);
 		this.setResizable(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
 		this.setVisible(true);
@@ -61,7 +61,6 @@ public class ScoreList extends JFrame
 			// players left game
 			for (int j = labels.size(); j > players.size(); j--)
 			{
-				System.out.println(j);
 				JLabel lbl = labels.remove(j - 1);
 				this.remove(lbl);
 				this.repaint();

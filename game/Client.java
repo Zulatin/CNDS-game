@@ -14,13 +14,13 @@ public class Client
 		// Get username
 		System.out.println("Input player name");
 		BufferedReader username = new BufferedReader(new InputStreamReader(System.in));
-		String theUsername = username.readLine();
+		String theUsername = username.readLine().trim();
 
-		if(username != null)
+		if(theUsername != null && theUsername.length() > 0)
 		{
 
 			// Start connection to server
-			Socket clientSocket = new Socket("10.10.132.44", 7531);
+			Socket clientSocket = new Socket("10.10.135.212", 7531);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -55,12 +55,8 @@ public class Client
 
 				// Gameplayet
 				Gameplayer game = new Gameplayer(scoreList, players);
-				Screen screen = new Screen(game.getLevel());
+				Screen screen = new Screen(game.getLevel(), outToServer);
 				screen.setVisible(true);
-
-				// Key listener
-				KeyClass keyListener = new KeyClass(outToServer);
-				screen.addKeyListener(keyListener);
 
 				// Draw players
 				for(Player player: players)

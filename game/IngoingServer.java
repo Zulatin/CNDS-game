@@ -23,7 +23,6 @@ public class IngoingServer extends Thread
 				// Find direction and command
 				direction = message[1];
 				command = message[0];
-
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

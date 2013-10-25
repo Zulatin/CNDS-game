@@ -44,10 +44,10 @@ public class Server
 	{
 		String[] args = action.split(";");
 
-		if(args[0].equals("ADDPLAYER") && args[1] != null)
+		if(args[0].equals("ADDPLAYER") && args[1] != null && args[1].trim().length() > 0)
 		{
 			// Start player and add player to players
-			Player player = new Player(args[1], br, dos, board);
+			Player player = new Player(args[1].trim(), br, dos, board);
 			players.add(player);
 
 			// Start new ingoing server

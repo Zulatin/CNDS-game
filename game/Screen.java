@@ -1,6 +1,10 @@
 package game;
 
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,12 +14,13 @@ public class Screen extends JFrame
 {
 	private JLabel[][] labels = new JLabel[20][20];
 	private String[][] level;
+	private DataOutputStream dos;
 
-
-	public Screen(String[][] level)
+	public Screen(String[][] level, DataOutputStream dos)
 	{
 		super("TKgame v. 1.0");
 		this.level = level;
+		this.dos = dos;
 
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(100, 100);
@@ -23,6 +28,7 @@ public class Screen extends JFrame
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
+		this.addKeyListener(new Keylistener());
 		draw();
 		this.setAlwaysOnTop(true);
 	}
@@ -74,5 +80,39 @@ public class Screen extends JFrame
 	public void undrawPlayer(Player player)
 	{
 		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/gulv2.png"));
+	}
+
+
+	public class Keylistener implements KeyListener
+	{
+		public void keyPressed(KeyEvent theKeyEvent)
+		{
+			String type = null;
+			if (theKeyEvent.getKeyCode() == KeyEvent.VK_UP)
+			{
+				type = "up";
+			}
+			if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
+			{
+				type = "down";
+			}
+			if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
+			{
+				type = "left";
+			}
+			if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
+			{
+				type = "right";
+			}
+
+			// Press
+			if(type != null)
+				try {
+					dos.writeBytes("MOVEPLAYER;" + type + '\n');
+				} catch (IOException e) {}
+		}
+
+		public void keyReleased(KeyEvent ke) {}
+		public void keyTyped(KeyEvent arg0) {}
 	}
 }

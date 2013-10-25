@@ -39,30 +39,23 @@ public class IngoingClient extends Thread
 						players.add(p);
 					}
 
-
-					// Reset board - player
-					for (Player player: game.players)
+					// Reset board
+					for (Player getPlayer: game.players)
 					{
-						// Undraw player
-						screen.undrawPlayer(player);
+						screen.undrawPlayer(getPlayer);
 					}
-
 
 					// Reset scorelist
 					this.game.scoreList.setPlayers(players);
 					this.game.scoreList.draw();
 					this.game.scoreList.updateScoreOnScreenAll();
 
-
 					// Setup new board
 					game.players = players;
 
-
-					// Run through players
-					for (Player player: game.players)
+					for (Player getPlayers: game.players)
 					{
-						// Draw player
-						screen.drawPlayer(player);
+						screen.drawPlayer(getPlayers);
 					}
 				}
 

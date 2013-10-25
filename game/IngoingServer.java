@@ -63,13 +63,17 @@ public class IngoingServer extends Thread
 						// Update scoreboard
 						Server.scoreList.updateScoreOnScreenAll();
 
+
+						// Create toClient string
 						String toClient = "";
 						player.setXpos(x);
 						player.setYpos(y);
+
 						for (Player getPlayer: Server.players)
 						{
 							toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";";
 						}
+
 
 						try
 						{

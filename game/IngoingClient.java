@@ -47,7 +47,6 @@ public class IngoingClient extends Thread
 
 					// Reset scorelist
 					this.game.scoreList.setPlayers(players);
-					this.game.scoreList.draw();
 					this.game.scoreList.updateScoreOnScreenAll();
 
 					// Setup new board

@@ -4,13 +4,10 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-
-public class Player {
-	String name;
-	String direction = "up";
-	int xpos = 5;
-	int ypos = 7;
-	int point = 0;
+public class Player
+{
+	String name, direction = "up";
+	int xpos = 5, ypos = 7, point = 0;
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
 	private Gameplayer board;

@@ -42,6 +42,7 @@ public class Server
 
 	public static void checkPlayer(String action, BufferedReader br, DataOutputStream dos) throws IOException, InterruptedException
 	{
+		// Split action
 		String[] args = action.split(";");
 
 		if(args[0].equals("ADDPLAYER") && args[1] != null && args[1].trim().length() > 0)

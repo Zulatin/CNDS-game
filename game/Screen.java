@@ -58,8 +58,7 @@ public class Screen extends JFrame
 
 	public void drawPlayer(Player player)
 	{
-		String playerDirection = player.getDirection();
-		String playerImage = "";
+		String playerDirection = player.getDirection(), playerImage = "";
 
 		if (playerDirection.equals("right")) {
 			playerImage = "./Image/Helthoejre.png";
@@ -73,6 +72,7 @@ public class Screen extends JFrame
 		if (playerDirection.equals("down")) {
 			playerImage = "./Image/HeltNed.png";
 		}
+
 		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));
 	}
 

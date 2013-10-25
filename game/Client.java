@@ -50,6 +50,7 @@ public class Client
 
 				// Create a scorelist
 				ScoreList scoreList = new ScoreList(players);
+				//scoreList.draw();
 				scoreList.setVisible(true);
 
 

@@ -2,14 +2,20 @@ package game;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 public class Client
 {
-	public static void main(String[] args) throws IOException, InterruptedException
+	public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException
 	{
 		// Get username
 		BufferedReader username, ip;
@@ -35,8 +41,6 @@ public class Client
 		{
 
 			// Start connection to server
-			//Socket clientSocket = new Socket("10.10.141.216", 7531);
-			//Socket clientSocket = new Socket("127.0.0.1", 7531);
 			Socket clientSocket = new Socket(theIP, 7531);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -81,6 +85,12 @@ public class Client
 				{
 					screen.drawPlayer(player);
 				}
+
+				// Start sound
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				clip.start();
 
 
 				// IngoingClient needs gameplayer to make changes

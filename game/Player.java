@@ -11,13 +11,15 @@ public class Player
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
 	private Gameplayer board;
+	private String color;
 
-	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, Gameplayer board)
+	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, Gameplayer board, String color)
 	{
 		this.name = name;
 		this.inFromClient = inFromClient;
 		this.outToClient = outToClient;
 		this.board = board;
+		this.color = color;
 	}
 
 	public Player(String name, int score)
@@ -81,6 +83,12 @@ public class Player
 
 	void addOnePoint() {
 		point++;
+	}
+	
+	
+
+	public String getColor() {
+		return color;
 	}
 
 	void subOnePoint() {

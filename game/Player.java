@@ -6,12 +6,11 @@ import java.io.IOException;
 
 public class Player
 {
-	String name, direction = "up";
+	String name, direction = "up", color;
 	int xpos = 5, ypos = 7, point = 0;
 	private BufferedReader inFromClient;
 	private DataOutputStream outToClient;
 	private Gameplayer board;
-	private String color;
 
 	public Player(String name, BufferedReader inFromClient, DataOutputStream outToClient, Gameplayer board, String color)
 	{

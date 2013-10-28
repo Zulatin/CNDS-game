@@ -52,7 +52,7 @@ public class Server
 
 		if(args[0].equals("ADDPLAYER") && args[1] != null && args[1].trim().length() > 0)
 		{
-			// Start player and add player to players
+			// Find out players color
 			String color = "";
 			if (players.size() == 0) {
 				color = "red";

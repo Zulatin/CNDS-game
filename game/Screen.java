@@ -58,19 +58,19 @@ public class Screen extends JFrame
 
 	public void drawPlayer(Player player)
 	{
-		String playerDirection = player.getDirection(), playerImage = "";
+		String playerDirection = player.getDirection(), playerImage = "", color = player.getColor();
 
 		if (playerDirection.equals("right")) {
-			playerImage = "./Image/Helthoejre.png";
+			playerImage = "./Image/bubble/" + color + "bubble_right.png";
 		}
 		if (playerDirection.equals("left")) {
-			playerImage = "./Image/Heltvenstre.png";
+			playerImage = "./Image/bubble/" + color + "bubble_left.png";
 		}
 		if (playerDirection.equals("up")) {
-			playerImage = "./Image/HeltOp.png";
+			playerImage = "./Image/bubble/" + color + "bubble_up.png";
 		}
 		if (playerDirection.equals("down")) {
-			playerImage = "./Image/HeltNed.png";
+			playerImage = "./Image/bubble/" + color + "bubble_down.png";
 		}
 
 		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));

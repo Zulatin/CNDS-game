@@ -46,12 +46,13 @@ public class Client
 				String[] settings = response.split(";");
 				ArrayList<Player> players = new ArrayList<Player>();
 
-				for(; index < settings.length; index += 5)
+				for(; index < settings.length; index += 6)
 				{
 					Player p = new Player(settings[index], Integer.parseInt(settings[index+3]));
 					p.setXpos(Integer.parseInt(settings[index+1]));
 					p.setYpos(Integer.parseInt(settings[index+2]));
 					p.setDirection(settings[index+4]);
+					p.setColor(settings[index+5]);
 					players.add(p);
 				}
 

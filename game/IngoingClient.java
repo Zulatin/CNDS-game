@@ -30,12 +30,13 @@ public class IngoingClient extends Thread
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
-					for(int i = 0; i < boardUpdate.length-4; i += 5)
+					for(int i = 0; i < boardUpdate.length-4; i += 6)
 					{
 						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i+3]));
 						p.setXpos(Integer.parseInt(boardUpdate[i+1]));
 						p.setYpos(Integer.parseInt(boardUpdate[i+2]));
 						p.setDirection(boardUpdate[i+4]);
+						p.setColor(boardUpdate[i+5]);
 						players.add(p);
 					}
 

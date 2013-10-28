@@ -40,7 +40,7 @@ public class Server
 				// Check player
 				checkPlayer(inFromClient.readLine(), inFromClient, outToClient);
 			}else{
-				outToClient.writeBytes("Server full");
+				outToClient.writeBytes("SERVERFULL\n");
 			}
 		}
 	}
@@ -67,6 +67,7 @@ public class Server
 				color = "green";
 			}
 
+			// Create new player
 			Player player = new Player(args[1].trim(), br, dos, board, color);
 			players.add(player);
 
@@ -77,7 +78,6 @@ public class Server
 			// Send to players that we have a new client
 			sendPlayers(dos);
 		}
-
 	}
 
 	public static void sendPlayers(DataOutputStream dos) throws IOException

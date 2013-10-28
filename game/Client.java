@@ -12,8 +12,8 @@ public class Client
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
 		// Get username
-		BufferedReader username;
-		String theUsername = "";
+		BufferedReader username, ip;
+		String theUsername = "", theIP = "";
 
 		// Keep asking for username until given
 		while(theUsername.length() <= 0)
@@ -23,12 +23,21 @@ public class Client
 			theUsername = username.readLine().trim();
 		}
 
+		// Keep asking for IP until given
+		while(theIP.length() <= 0)
+		{
+			System.out.println("Input IP (10.10.141.216)");
+			ip = new BufferedReader(new InputStreamReader(System.in));
+			theIP = ip.readLine().trim();
+		}
+
 		if(theUsername != null && theUsername.length() > 0)
 		{
 
 			// Start connection to server
 			//Socket clientSocket = new Socket("10.10.141.216", 7531);
-			Socket clientSocket = new Socket("127.0.0.1", 7531);
+			//Socket clientSocket = new Socket("127.0.0.1", 7531);
+			Socket clientSocket = new Socket(theIP, 7531);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -38,9 +47,8 @@ public class Client
 			// Get response from server
 			String response = inFromServer.readLine();
 
-
 			// If server is not full
-			if(!response.equals("Server full"))
+			if(!response.equals("SERVERFULL"))
 			{
 				int index = 0;
 				String[] settings = response.split(";");
@@ -81,9 +89,11 @@ public class Client
 				// Shizzle on the thread
 				inThread.start();
 				inThread.join();
-			}
-			else {
-				System.out.println("Server is full");
+			} else {
+				// Close connection
+				clientSocket.close();
+
+				System.out.println("The server is full... Please try again later.");
 			}
 
 			// Close connection

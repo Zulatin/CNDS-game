@@ -23,7 +23,7 @@ public class Screen extends JFrame
 		this.dos = dos;
 
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setLocation(100, 100);
+		this.setLocation(200, 50);
 		this.setSize(700, 700);
 		this.setResizable(true);
 		this.setVisible(true);

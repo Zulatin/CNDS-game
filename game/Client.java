@@ -18,8 +18,9 @@ public class Client
 	public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException
 	{
 		// Get username
-		BufferedReader username, ip;
+		BufferedReader username, ip, music;
 		String theUsername = "", theIP = "";
+		boolean theMusic = true;
 
 		// Keep asking for username until given
 		while(theUsername.length() <= 0)
@@ -35,6 +36,14 @@ public class Client
 			System.out.println("Input IP (10.10.141.216)");
 			ip = new BufferedReader(new InputStreamReader(System.in));
 			theIP = ip.readLine().trim();
+		}
+
+		// Ask for music
+		System.out.println("Music (Y/n)");
+		music = new BufferedReader(new InputStreamReader(System.in));
+		if(music.readLine().trim().toLowerCase().equals("n"))
+		{
+			theMusic = false;
 		}
 
 		if(theUsername != null && theUsername.length() > 0)
@@ -87,10 +96,13 @@ public class Client
 				}
 
 				// Start sound
-				Clip clip = AudioSystem.getClip();
-				clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
-				clip.start();
+				if(theMusic == true)
+				{
+					Clip clip = AudioSystem.getClip();
+					clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
+					clip.loop(Clip.LOOP_CONTINUOUSLY);
+					clip.start();
+				}
 
 
 				// IngoingClient needs gameplayer to make changes

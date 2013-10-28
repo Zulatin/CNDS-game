@@ -12,9 +12,16 @@ public class Client
 	public static void main(String[] args) throws IOException, InterruptedException
 	{
 		// Get username
-		System.out.println("Input player name");
-		BufferedReader username = new BufferedReader(new InputStreamReader(System.in));
-		String theUsername = username.readLine().trim();
+		BufferedReader username;
+		String theUsername = "";
+
+		// Keep asking for username until given
+		while(theUsername.length() <= 0)
+		{
+			System.out.println("Input player name");
+			username = new BufferedReader(new InputStreamReader(System.in));
+			theUsername = username.readLine().trim();
+		}
 
 		if(theUsername != null && theUsername.length() > 0)
 		{

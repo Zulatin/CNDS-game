@@ -27,8 +27,8 @@ public class Client
 		{
 
 			// Start connection to server
-			//Socket clientSocket = new Socket("10.10.141.216", 7531);
-			Socket clientSocket = new Socket("127.0.0.1", 7531);
+			Socket clientSocket = new Socket("10.10.141.216", 7531);
+			//Socket clientSocket = new Socket("127.0.0.1", 7531);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 

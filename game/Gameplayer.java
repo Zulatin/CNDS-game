@@ -41,4 +41,10 @@ public class Gameplayer
 	{
 		return level;
 	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+	
+	
 }

@@ -1,37 +1,33 @@
 package game;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class IngoingServer extends Thread
-{
+public class IngoingServer extends Thread {
 	private Player player;
 	private String direction = "left", wall = "w", command = "";
 
-	public IngoingServer(Player player)
-	{
+	public IngoingServer(Player player) {
 		this.player = player;
 	}
 
-	public void run()
-	{
-		while(true)
-		{
+	public void run() {
+		while (true) {
 			String getInFromClient = null;
 			try {
 				getInFromClient = player.getInFromClient().readLine();
-			} catch (IOException e1) {}
-
+			} catch (IOException e1) {
+			}
 
 			// Check if getInFromClient
-			if(getInFromClient == null)
-			{
+			if (getInFromClient == null) {
 
 				// Close thread
 				Thread.currentThread().interrupt();
 				Server.players.remove(player);
 				return;
 
-			}else{
+			} else {
 
 				// Split string from client
 				String[] message = getInFromClient.split(";");
@@ -40,11 +36,8 @@ public class IngoingServer extends Thread
 				direction = message[1];
 				command = message[0];
 
-
-				if (command.equals("MOVEPLAYER"))
-				{
-					if (direction != null)
-					{
+				if (command.equals("MOVEPLAYER")) {
+					if (direction != null) {
 						player.setDirection(direction);
 						int x = player.getXpos(), y = player.getYpos();
 
@@ -62,8 +55,7 @@ public class IngoingServer extends Thread
 						}
 
 						String[][] level = player.getBoard().getLevel();
-						if(level[x][y].equals(wall))
-						{
+						if (level[x][y].equals(wall)) {
 
 							// Take a point from player
 							player.subOnePoint();
@@ -86,17 +78,19 @@ public class IngoingServer extends Thread
 						// Create toClient string
 						String toClient = "";
 
-						for (Player getPlayer: Server.players)
-						{
-							toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";" + getPlayer.getColor() + ";";
+						for (Player getPlayer : Server.players) {
+							toClient += getPlayer.getName() + ";"
+									+ getPlayer.getXpos() + ";"
+									+ getPlayer.getYpos() + ";"
+									+ getPlayer.getPoint() + ";"
+									+ getPlayer.getDirection() + ";"
+									+ getPlayer.getColor() + ";";
 						}
 
-
-						try
-						{
+						try {
 
 							// For-each players and write players to them
-							for (Player getPlayers: Server.players)
+							for (Player getPlayers : Server.players)
 								getPlayers.output(toClient);
 
 						} catch (IOException e) {
@@ -106,8 +100,141 @@ public class IngoingServer extends Thread
 					}
 				}
 
-				if (command.equals("REMOVEPLAYER"))
-				{
+				if (command.equals("REMOVEPLAYER")) {
+
+				}
+				if (command.equals("SHOOT")) {
+					String direction = player.getDirection();
+					int x = player.getXpos();
+					int y = player.getYpos();
+					String[][] board = player.getBoard().getLevel();
+					ArrayList<Player> players = new ArrayList<Player>(player
+							.getBoard().getPlayers());
+
+					// check x for other players, if found check if that players
+					// y coord is SMALLER
+
+					if (direction.equals("up")) {
+						y--;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										//TODO Player hit, give points, ??respawn player??
+
+									} else {
+										counter++;
+									}
+									counter = 0;
+									y = y - 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+
+					}
+
+					// check x for other players, if found check if that players
+					// y coord is BIGGER
+					if (direction.equals("down")) {
+						// y+1
+						y++;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										//TODO Player hit, give points, ??respawn player??
+
+									} else {
+										counter++;
+									}
+									counter = 0;
+									y = y + 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+
+					}
+					// check y for other players, if found check if that players
+					// x coord is SMALLER
+					if (direction.equals("left")) {
+						// x-1
+						x--;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										//TODO Player hit, give points, ??respawn player??
+
+									} else {
+										counter++;
+									}
+									counter = 0;
+									x = x - 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+					}
+					// check y for other players, if found check if that players
+					// y coord is BIGGER
+					if (direction.equals("right")) {
+						// x+1
+						x++;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										//TODO Player hit, give points, ??respawn player??
+
+									} else {
+										counter++;
+									}
+									counter = 0;
+									x = x + 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+
+					}
 
 				}
 

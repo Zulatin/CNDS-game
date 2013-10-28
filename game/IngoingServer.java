@@ -88,7 +88,7 @@ public class IngoingServer extends Thread
 
 						for (Player getPlayer: Server.players)
 						{
-							toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";";
+							toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";" + getPlayer.getColor() + ";";
 						}
 
 

@@ -17,7 +17,7 @@ public class ScoreList extends JFrame
 	{
 		super("TKgame v. 1.0");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setLocation(600, 100);
+		this.setLocation(800, 100);
 		this.setSize(175, 500);
 		this.setResizable(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));

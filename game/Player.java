@@ -84,15 +84,17 @@ public class Player
 	void addOnePoint() {
 		point++;
 	}
-	
-	
+
+	void subOnePoint() {
+		point--;
+	}
 
 	public String getColor() {
 		return color;
 	}
 
-	void subOnePoint() {
-		point--;
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public synchronized void output(String toClient) throws IOException

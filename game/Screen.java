@@ -24,7 +24,7 @@ public class Screen extends JFrame
 
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(100, 100);
-		this.setSize(500, 500);
+		this.setSize(700, 700);
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
@@ -61,16 +61,16 @@ public class Screen extends JFrame
 		String playerDirection = player.getDirection(), playerImage = "", color = player.getColor();
 
 		if (playerDirection.equals("right")) {
-			playerImage = "./Image/bubble/" + color + "bubble_right.png";
+			playerImage = "./Image/bubble/" + color + "/bubble_right.png";
 		}
 		if (playerDirection.equals("left")) {
-			playerImage = "./Image/bubble/" + color + "bubble_left.png";
+			playerImage = "./Image/bubble/" + color + "/bubble_left.png";
 		}
 		if (playerDirection.equals("up")) {
-			playerImage = "./Image/bubble/" + color + "bubble_up.png";
+			playerImage = "./Image/bubble/" + color + "/bubble_up.png";
 		}
 		if (playerDirection.equals("down")) {
-			playerImage = "./Image/bubble/" + color + "bubble_down.png";
+			playerImage = "./Image/bubble/" + color + "/bubble_down.png";
 		}
 
 		labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon(playerImage));

@@ -18,7 +18,7 @@ public class Screen extends JFrame
 
 	public Screen(String[][] level, DataOutputStream dos)
 	{
-		super("TKgame v. 1.0");
+		super("Bubble Shooter");
 		this.level = level;
 		this.dos = dos;
 

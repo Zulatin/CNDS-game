@@ -15,7 +15,7 @@ public class ScoreList extends JFrame
 
 	public ScoreList(ArrayList<Player> players)
 	{
-		super("TKgame v. 1.0");
+		super("Bubble Shooter");
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocation(900, 50);
 		this.setSize(175, 700);

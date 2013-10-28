@@ -27,6 +27,7 @@ public class IngoingClient extends Thread
 				String sentence = inFromServer.readLine();
 				if(sentence != null)
 				{
+					System.out.println(sentence);
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 

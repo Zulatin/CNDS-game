@@ -32,6 +32,7 @@ public class IngoingServer extends Thread
 			{
 				if (direction != null)
 				{
+					player.setDirection(direction);
 					int x = player.getXpos(), y = player.getYpos();
 
 					if (direction.equals("right")) {
@@ -48,7 +49,7 @@ public class IngoingServer extends Thread
 					}
 
 					String[][] level = player.getBoard().getLevel();
-					if (level[x][y].equals(wall))
+					if(level[x][y].equals(wall))
 					{
 
 						// Take a point from player
@@ -63,28 +64,28 @@ public class IngoingServer extends Thread
 						// Update scoreboard
 						Server.scoreList.updateScoreOnScreenAll();
 
+					}
 
-						// Create toClient string
-						String toClient = "";
-						player.setXpos(x);
-						player.setYpos(y);
+					// Create toClient string
+					String toClient = "";
+					player.setXpos(x);
+					player.setYpos(y);
 
-						for (Player getPlayer: Server.players)
-						{
-							toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";";
-						}
+					for (Player getPlayer: Server.players)
+					{
+						toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";";
+					}
 
 
-						try
-						{
+					try
+					{
 
-							// For-each players and write players to them
-							for (Player getPlayers: Server.players)
-								getPlayers.output(toClient);
+						// For-each players and write players to them
+						for (Player getPlayers: Server.players)
+							getPlayers.output(toClient);
 
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
 
 				}

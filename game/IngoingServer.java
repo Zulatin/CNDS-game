@@ -20,14 +20,14 @@ public class IngoingServer extends Thread
 	{
 		this.player = player;
 		this.permissionToShoot = true;
-		random = new Random();
+		this.random = new Random();
 	}
 
 	public void run()
 	{
 		while (true)
 		{
-			
+
 			String getInFromClient = null;
 			try
 			{
@@ -61,8 +61,7 @@ public class IngoingServer extends Thread
 
 				// Start players
 				ArrayList<Player> players = new ArrayList<Player>(this.player.getBoard().getPlayers());
-				Server.scoreList.draw();
-				Server.scoreList.updateScoreOnScreenAll();
+
 				// Find direction and command
 				this.command = message[0];
 
@@ -101,7 +100,7 @@ public class IngoingServer extends Thread
 							// player.subOnePoint();
 
 							// Update scoreboard
-							
+							// Server.scoreList.updateScoreOnScreenAll();
 
 						}
 						else
@@ -111,7 +110,7 @@ public class IngoingServer extends Thread
 							// player.addOnePoint();
 
 							// Update scoreboard
-							Server.scoreList.updateScoreOnScreenAll();
+							// Server.scoreList.updateScoreOnScreenAll();
 
 							// Set player positions
 							this.player.setXpos(x);
@@ -159,12 +158,13 @@ public class IngoingServer extends Thread
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
-											int ranX = random.nextInt(20);
-											int ranY = random.nextInt(20);
-											String[][] level = player.getBoard().getLevel();
-											while(level[ranX][ranY].equals("w")){
-												ranX = random.nextInt(20);
-												ranY = random.nextInt(20);
+											int ranX = this.random.nextInt(20);
+											int ranY = this.random.nextInt(20);
+											String[][] level = this.player.getBoard().getLevel();
+											while (level[ranX][ranY].equals("w"))
+											{
+												ranX = this.random.nextInt(20);
+												ranY = this.random.nextInt(20);
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -210,12 +210,13 @@ public class IngoingServer extends Thread
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
-											int ranX = random.nextInt(20);
-											int ranY = random.nextInt(20);
-											String[][] level = player.getBoard().getLevel();
-											while(level[ranX][ranY].equals("w")){
-												ranX = random.nextInt(20);
-												ranY = random.nextInt(20);
+											int ranX = this.random.nextInt(20);
+											int ranY = this.random.nextInt(20);
+											String[][] level = this.player.getBoard().getLevel();
+											while (level[ranX][ranY].equals("w"))
+											{
+												ranX = this.random.nextInt(20);
+												ranY = this.random.nextInt(20);
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -260,12 +261,13 @@ public class IngoingServer extends Thread
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
-											int ranX = random.nextInt(20);
-											int ranY = random.nextInt(20);
-											String[][] level = player.getBoard().getLevel();
-											while(level[ranX][ranY].equals("w")){
-												ranX = random.nextInt(20);
-												ranY = random.nextInt(20);
+											int ranX = this.random.nextInt(20);
+											int ranY = this.random.nextInt(20);
+											String[][] level = this.player.getBoard().getLevel();
+											while (level[ranX][ranY].equals("w"))
+											{
+												ranX = this.random.nextInt(20);
+												ranY = this.random.nextInt(20);
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -309,12 +311,13 @@ public class IngoingServer extends Thread
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
-											int ranX = random.nextInt(20);
-											int ranY = random.nextInt(20);
-											String[][] level = player.getBoard().getLevel();
-											while(level[ranX][ranY].equals("w")){
-												ranX = random.nextInt(20);
-												ranY = random.nextInt(20);
+											int ranX = this.random.nextInt(20);
+											int ranY = this.random.nextInt(20);
+											String[][] level = this.player.getBoard().getLevel();
+											while (level[ranX][ranY].equals("w"))
+											{
+												ranX = this.random.nextInt(20);
+												ranY = this.random.nextInt(20);
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -353,6 +356,11 @@ public class IngoingServer extends Thread
 						this.timer.start();
 					}
 				}
+
+				// Update scoreboard
+				Server.scoreList.setPlayers(players);
+				Server.scoreList.updateScoreOnScreenAll();
+
 			}
 		}
 	}

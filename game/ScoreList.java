@@ -29,6 +29,7 @@ public class ScoreList extends JFrame
 
 	public void setPlayers(ArrayList<Player> players)
 	{
+		this.labels = null;
 		this.players = players;
 	}
 
@@ -40,7 +41,7 @@ public class ScoreList extends JFrame
 			l.setSize(50, 200);
 			this.add(l);
 			this.labels.add(l);
-			
+
 		}
 	}
 
@@ -72,9 +73,11 @@ public class ScoreList extends JFrame
 			this.labels.get((j)).setText(this.players.get(j).toString());
 		}
 	}
-	
-	public void nulstilListe(){
-		for (Player p: players){
+
+	public void nulstilListe()
+	{
+		for (Player p : this.players)
+		{
 			p.resetScore();
 		}
 	}

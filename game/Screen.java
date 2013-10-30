@@ -15,6 +15,7 @@ public class Screen extends JFrame
 	private JLabel[][] labels = new JLabel[20][20];
 	private String[][] level;
 	private DataOutputStream dos;
+	Keylistener keyListener;
 
 	public Screen(String[][] level, DataOutputStream dos)
 	{
@@ -28,7 +29,8 @@ public class Screen extends JFrame
 		this.setResizable(true);
 		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 20, 0, 0));
-		this.addKeyListener(new Keylistener());
+		this.keyListener = new Keylistener();
+		this.addKeyListener(this.keyListener);
 		this.draw();
 		this.setAlwaysOnTop(true);
 	}
@@ -86,8 +88,20 @@ public class Screen extends JFrame
 		this.labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/gulv2.png"));
 	}
 
+	public void connectionClosed(boolean closed)
+	{
+		this.keyListener.connectionClosed(closed);
+	}
+
 	public class Keylistener implements KeyListener
 	{
+		private boolean closed = false;
+
+		public void connectionClosed(boolean closed)
+		{
+			this.closed = true;
+		}
+
 		public void keyPressed(KeyEvent theKeyEvent)
 		{
 			String type = null, command = null;
@@ -119,7 +133,7 @@ public class Screen extends JFrame
 			// Press
 			try
 			{
-				if (command != null)
+				if (command != null && this.closed == false)
 					Screen.this.dos.writeBytes(command + ";" + type + '\n');
 			} catch (IOException e)
 			{

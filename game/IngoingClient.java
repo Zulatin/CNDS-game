@@ -22,15 +22,36 @@ public class IngoingClient extends Thread
 	{
 		while (this.connected)
 		{
+			String getInFromServer = null;
 			try
 			{
-				String sentence = this.inFromServer.readLine();
+				getInFromServer = this.inFromServer.readLine();
+			} catch (IOException e)
+			{
+			}
+
+			// Check if getInFromClient
+			if (getInFromServer == null)
+			{
+
+				// Close thread
+				Thread.currentThread().interrupt();
+				this.connected = false;
+				this.screen.connectionClosed(true);
+				return;
+
+			}
+			else
+			{
+
+				String sentence = getInFromServer;
 				if (sentence != null)
 				{
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
-					// Find names, positions, direction and color from server
+					// Find names, positions, direction and color from
+					// server
 					for (int i = 0; i < boardUpdate.length - 4; i += 6)
 					{
 						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i + 3]));
@@ -61,10 +82,6 @@ public class IngoingClient extends Thread
 						this.screen.drawPlayer(getPlayers);
 					}
 				}
-
-			} catch (IOException e)
-			{
-				e.printStackTrace();
 			}
 		}
 	}

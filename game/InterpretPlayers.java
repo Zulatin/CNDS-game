@@ -10,12 +10,12 @@ public class InterpretPlayers
 	{
 		players = null;
 		String[] boardUpdate = response.split(";");
-		for(int index = 0; index < boardUpdate.length-4; index += 5)
+		for (int index = 0; index < boardUpdate.length - 4; index += 5)
 		{
-			Player p = new Player(boardUpdate[index], Integer.parseInt(boardUpdate[index+3]));
-			p.setXpos(Integer.parseInt(boardUpdate[index+1]));
-			p.setYpos(Integer.parseInt(boardUpdate[index+2]));
-			p.setDirection(boardUpdate[index+4]);
+			Player p = new Player(boardUpdate[index], Integer.parseInt(boardUpdate[index + 3]));
+			p.setXpos(Integer.parseInt(boardUpdate[index + 1]));
+			p.setYpos(Integer.parseInt(boardUpdate[index + 2]));
+			p.setDirection(boardUpdate[index + 4]);
 			players.add(p);
 		}
 

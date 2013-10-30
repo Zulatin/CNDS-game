@@ -26,7 +26,7 @@ public class Server
 		DataOutputStream outToClient;
 		BufferedReader inFromClient;
 
-		while(true)
+		while (true)
 		{
 			// Accept new connections
 			Socket connectionSocket = welcomeSocket.accept();
@@ -35,11 +35,13 @@ public class Server
 			outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 			inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 
-			if(players.size() < 4)
+			if (players.size() < 4)
 			{
 				// Check player
 				checkPlayer(inFromClient.readLine(), inFromClient, outToClient);
-			}else{
+			}
+			else
+			{
 				outToClient.writeBytes("SERVERFULL\n");
 			}
 		}
@@ -50,20 +52,24 @@ public class Server
 		// Split action
 		String[] args = action.split(";");
 
-		if(args[0].equals("ADDPLAYER") && args[1] != null && args[1].trim().length() > 0)
+		if (args[0].equals("ADDPLAYER") && args[1] != null && args[1].trim().length() > 0)
 		{
 			// Find out players color
 			String color = "";
-			if (players.size() == 0) {
+			if (players.size() == 0)
+			{
 				color = "red";
 			}
-			if (players.size() == 1) {
+			if (players.size() == 1)
+			{
 				color = "blue";
 			}
-			if (players.size() == 2) {
+			if (players.size() == 2)
+			{
 				color = "purple";
 			}
-			if (players.size() == 3) {
+			if (players.size() == 3)
+			{
 				color = "green";
 			}
 
@@ -85,7 +91,7 @@ public class Server
 		String toClient = "";
 
 		// Run through our players
-		for (Player player: players)
+		for (Player player : players)
 		{
 			// Create string with players
 			toClient += player.getName() + ";" + player.getXpos() + ";" + player.getYpos() + ";" + player.getPoint() + ";" + player.getDirection() + ";" + player.getColor() + ";";

@@ -1,39 +1,46 @@
 package game;
 
-public class ShootThread extends Thread {
+public class ShootThread extends Thread
+{
 
 	private String[][] level;
 	private Player player;
 	private String direction;
 
-	public ShootThread(String[][] level, Player p, Screen s) {
+	public ShootThread(String[][] level, Player p, Screen s)
+	{
 		this.level = level;
-		player = p;
-		
+		this.player = p;
+
 	}
 
-	public void run() {
-		int x = player.getXpos();
-		int y = player.getYpos();
-		direction = player.getDirection();
+	public void run()
+	{
+		int x = this.player.getXpos();
+		int y = this.player.getYpos();
+		this.direction = this.player.getDirection();
 		int counter = 0;
-		
 
-		if (direction.equals("right")) {
+		if (this.direction.equals("right"))
+		{
 			x++;
 			counter++;
 			boolean found = false;
-			while(!found){
-//				if()
+			while (!found)
+			{
+				// if()
 			}
 		}
-		if (direction.equals("up")) {
+		if (this.direction.equals("up"))
+		{
 
 		}
-		if (direction.equals("down")) {
+		if (this.direction.equals("down"))
+		{
 
 		}
-		if (direction.equals("left")) {
+		if (this.direction.equals("left"))
+		{
 
 		}
 	}

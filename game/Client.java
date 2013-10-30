@@ -29,49 +29,46 @@ public class Client extends JFrame
 	private JButton btnConnect;
 	private Handler handler;
 
-
-
 	public static void main(String[] args) throws Exception
 	{
-		Client c = new Client();
-		c.setVisible(true);
+		// Client c = new Client();
+		new Client().setVisible(true);
+	}
+
+	public Client() throws Exception
+	{
+		this.setBounds(400, 400, 480, 60);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
+		this.handler = new Handler();
+
+		this.panel = new Panel();
+		this.getContentPane().add(this.panel);
+		this.panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+
+		this.lblIp = new JLabel("IP");
+		this.panel.add(this.lblIp);
+
+		this.txtIp = new JTextField();
+		this.panel.add(this.txtIp);
+		this.txtIp.setColumns(10);
+
+		this.lblUsername = new JLabel("Username");
+		this.panel.add(this.lblUsername);
+
+		this.txtUsername = new JTextField();
+		this.panel.add(this.txtUsername);
+		this.txtUsername.setColumns(10);
+
+		this.btnConnect = new JButton("Connect");
+		this.btnConnect.addActionListener(this.handler);
+		this.panel.add(this.btnConnect);
 
 	}
 
-	public Client() throws Exception{
-		setBounds(400, 400, 421, 66);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		getContentPane().setLayout(new GridLayout(1, 0, 0, 0));
-		handler = new Handler();
-
-		panel = new Panel();
-		getContentPane().add(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		lblIp = new JLabel("IP");
-		panel.add(lblIp);
-
-		txtIp = new JTextField();
-		panel.add(txtIp);
-		txtIp.setColumns(10);
-
-		lblUsername = new JLabel("Username");
-		panel.add(lblUsername);
-
-		txtUsername = new JTextField();
-		panel.add(txtUsername);
-		txtUsername.setColumns(10);
-
-		btnConnect = new JButton("Connect");
-		btnConnect.addActionListener(handler);
-		panel.add(btnConnect);
-
-	}
-
-	private void login(String ip, String username) throws Exception{
-
-
+	private void login(String ip, String username) throws Exception
+	{
 		// Start connection to server
 		Socket clientSocket = new Socket(ip, 7531);
 		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -89,6 +86,7 @@ public class Client extends JFrame
 			String[] settings = response.split(";");
 			ArrayList<Player> players = new ArrayList<Player>();
 
+			// Run through players from server
 			for (; index < settings.length; index += 6)
 			{
 				Player p = new Player(settings[index], Integer.parseInt(settings[index + 3]));
@@ -132,24 +130,26 @@ public class Client extends JFrame
 			// Close connection
 			clientSocket.close();
 
+			// Print server is full
 			System.out.println("The server is full... Please try again later.");
 		}
-
 	}
 
-
-	private class Handler implements ActionListener{
-
+	private class Handler implements ActionListener
+	{
 		@Override
-		public void actionPerformed(ActionEvent ae) {
-			if (ae.getSource().equals(btnConnect)){
-				try {
-					login(txtIp.getText(), txtUsername.getText());
-				} catch (Exception e) {
+		public void actionPerformed(ActionEvent ae)
+		{
+			if (ae.getSource().equals(Client.this.btnConnect))
+			{
+				try
+				{
+					Client.this.login(Client.this.txtIp.getText(), Client.this.txtUsername.getText());
+				} catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
-
 		}
 	}
 }

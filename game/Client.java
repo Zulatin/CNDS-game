@@ -18,12 +18,11 @@ public class Client
 	public static void main(String[] args) throws IOException, InterruptedException, LineUnavailableException, UnsupportedAudioFileException
 	{
 		// Get username
-		BufferedReader username, ip, music;
+		BufferedReader username, ip;
 		String theUsername = "", theIP = "";
-		boolean theMusic = true;
 
 		// Keep asking for username until given
-		while(theUsername.length() <= 0)
+		while (theUsername.length() <= 0)
 		{
 			System.out.println("Input player name");
 			username = new BufferedReader(new InputStreamReader(System.in));
@@ -31,22 +30,14 @@ public class Client
 		}
 
 		// Keep asking for IP until given
-		while(theIP.length() <= 0)
+		while (theIP.length() <= 0)
 		{
 			System.out.println("Input IP (10.10.141.216)");
 			ip = new BufferedReader(new InputStreamReader(System.in));
 			theIP = ip.readLine().trim();
 		}
 
-		// Ask for music
-		System.out.println("Music (Y/n)");
-		music = new BufferedReader(new InputStreamReader(System.in));
-		if(music.readLine().trim().toLowerCase().equals("n"))
-		{
-			theMusic = false;
-		}
-
-		if(theUsername != null && theUsername.length() > 0)
+		if (theUsername != null && theUsername.length() > 0)
 		{
 
 			// Start connection to server
@@ -54,35 +45,32 @@ public class Client
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-
 			// Send add player to server
 			outToServer.writeBytes("ADDPLAYER;" + theUsername + '\n');
 			// Get response from server
 			String response = inFromServer.readLine();
 
 			// If server is not full
-			if(!response.equals("SERVERFULL"))
+			if (!response.equals("SERVERFULL"))
 			{
 				int index = 0;
 				String[] settings = response.split(";");
 				ArrayList<Player> players = new ArrayList<Player>();
 
-				for(; index < settings.length; index += 6)
+				for (; index < settings.length; index += 6)
 				{
-					Player p = new Player(settings[index], Integer.parseInt(settings[index+3]));
-					p.setXpos(Integer.parseInt(settings[index+1]));
-					p.setYpos(Integer.parseInt(settings[index+2]));
-					p.setDirection(settings[index+4]);
-					p.setColor(settings[index+5]);
+					Player p = new Player(settings[index], Integer.parseInt(settings[index + 3]));
+					p.setXpos(Integer.parseInt(settings[index + 1]));
+					p.setYpos(Integer.parseInt(settings[index + 2]));
+					p.setDirection(settings[index + 4]);
+					p.setColor(settings[index + 5]);
 					players.add(p);
 				}
 
-
 				// Create a scorelist
 				ScoreList scoreList = new ScoreList(players);
-				//scoreList.draw();
+				// scoreList.draw();
 				scoreList.setVisible(true);
-
 
 				// Gameplayet
 				Gameplayer game = new Gameplayer(scoreList, players);
@@ -90,20 +78,16 @@ public class Client
 				screen.setVisible(true);
 
 				// Draw players
-				for(Player player: players)
+				for (Player player : players)
 				{
 					screen.drawPlayer(player);
 				}
 
 				// Start sound
-				if(theMusic == true)
-				{
-					Clip clip = AudioSystem.getClip();
-					clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
-					clip.loop(Clip.LOOP_CONTINUOUSLY);
-					clip.start();
-				}
-
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				clip.start();
 
 				// IngoingClient needs gameplayer to make changes
 				IngoingClient inThread = new IngoingClient(inFromServer, game, screen);
@@ -111,7 +95,9 @@ public class Client
 				// Shizzle on the thread
 				inThread.start();
 				inThread.join();
-			} else {
+			}
+			else
+			{
 				// Close connection
 				clientSocket.close();
 

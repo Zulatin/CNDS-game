@@ -90,43 +90,41 @@ public class Screen extends JFrame
 	{
 		public void keyPressed(KeyEvent theKeyEvent)
 		{
-			String type = null;
+			String type = null, command = null;
 			if (theKeyEvent.getKeyCode() == KeyEvent.VK_UP)
 			{
+				command = "MOVEPLAYER";
 				type = "up";
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
 			{
+				command = "MOVEPLAYER";
 				type = "down";
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
 			{
+				command = "MOVEPLAYER";
 				type = "left";
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
+				command = "MOVEPLAYER";
 				type = "right";
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE)
 			{
-				try
-				{
-					Screen.this.dos.writeBytes("SHOOT;" + '\n');
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				}
+				command = "SHOOT";
 			}
 
 			// Press
-			if (type != null)
-				try
-				{
-					Screen.this.dos.writeBytes("MOVEPLAYER;" + type + '\n');
-				} catch (IOException e)
-				{
-					e.printStackTrace();
-				}
+			try
+			{
+				if (command != null)
+					Screen.this.dos.writeBytes(command + ";" + type + '\n');
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 
 		public void keyReleased(KeyEvent ke)

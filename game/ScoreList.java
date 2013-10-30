@@ -40,6 +40,7 @@ public class ScoreList extends JFrame
 			l.setSize(50, 200);
 			this.add(l);
 			this.labels.add(l);
+			
 		}
 	}
 
@@ -69,6 +70,12 @@ public class ScoreList extends JFrame
 		for (int j = 0; j < this.players.size(); j++)
 		{
 			this.labels.get((j)).setText(this.players.get(j).toString());
+		}
+	}
+	
+	public void nulstilListe(){
+		for (Player p: players){
+			p.resetScore();
 		}
 	}
 }

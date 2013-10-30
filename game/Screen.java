@@ -92,22 +92,29 @@ public class Screen extends JFrame
 			{
 				type = "up";
 			}
-			if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
+			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
 			{
 				type = "down";
 			}
-			if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
+			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
 			{
 				type = "left";
 			}
-			if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
+			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
 				type = "right";
+			}
+			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE){
+				type = "shoot";
 			}
 
 			// Press
 			if(type != null)
 				try {
+					if (type.equals("shoot")){
+						dos.writeBytes("SHOOT;" + +'\n');
+					}
+					else
 					dos.writeBytes("MOVEPLAYER;" + type + '\n');
 				} catch (IOException e) {}
 		}

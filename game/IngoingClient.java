@@ -24,26 +24,27 @@ public class IngoingClient extends Thread
 		{
 			try
 			{
-				String sentence = inFromServer.readLine();
-				if(sentence != null)
+				String sentence = this.inFromServer.readLine();
+				if (sentence != null)
 				{
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
-					for(int i = 0; i < boardUpdate.length-4; i += 6)
+					// Find names, positions, direction and color from server
+					for (int i = 0; i < boardUpdate.length - 4; i += 6)
 					{
-						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i+3]));
-						p.setXpos(Integer.parseInt(boardUpdate[i+1]));
-						p.setYpos(Integer.parseInt(boardUpdate[i+2]));
-						p.setDirection(boardUpdate[i+4]);
-						p.setColor(boardUpdate[i+5]);
+						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i + 3]));
+						p.setXpos(Integer.parseInt(boardUpdate[i + 1]));
+						p.setYpos(Integer.parseInt(boardUpdate[i + 2]));
+						p.setDirection(boardUpdate[i + 4]);
+						p.setColor(boardUpdate[i + 5]);
 						players.add(p);
 					}
 
 					// Reset board
-					for (Player getPlayer: game.players)
+					for (Player getPlayer : this.game.players)
 					{
-						screen.undrawPlayer(getPlayer);
+						this.screen.undrawPlayer(getPlayer);
 					}
 
 					// Reset scorelist
@@ -51,15 +52,18 @@ public class IngoingClient extends Thread
 					this.game.scoreList.updateScoreOnScreenAll();
 
 					// Setup new board
-					game.players = players;
+					this.game.players = players;
 
-					for (Player getPlayers: game.players)
+					// For-each players
+					for (Player getPlayers : this.game.players)
 					{
-						screen.drawPlayer(getPlayers);
+						// To draw them
+						this.screen.drawPlayer(getPlayers);
 					}
 				}
 
-			} catch (IOException e) {
+			} catch (IOException e)
+			{
 				e.printStackTrace();
 			}
 		}

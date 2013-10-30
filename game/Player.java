@@ -87,6 +87,10 @@ public class Player
 	void subOnePoint() {
 		point--;
 	}
+	
+	void shotPlayer(){
+		point = point - 25;
+	}
 
 	public String getColor() {
 		return color;

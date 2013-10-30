@@ -29,7 +29,7 @@ public class ScoreList extends JFrame
 
 	public void setPlayers(ArrayList<Player> players)
 	{
-		this.labels = null;
+		// this.labels = null;
 		this.players = players;
 	}
 

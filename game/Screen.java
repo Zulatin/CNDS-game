@@ -109,21 +109,23 @@ public class Screen extends JFrame
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE)
 			{
-				type = "shoot";
-
+				try
+				{
+					Screen.this.dos.writeBytes("SHOOT;" + '\n');
+				} catch (IOException e)
+				{
+					e.printStackTrace();
+				}
 			}
+
 			// Press
 			if (type != null)
 				try
 				{
-					if (type.equals("shoot"))
-					{
-						Screen.this.dos.writeBytes("SHOOT;" + '\n');
-					}
-					else
-						Screen.this.dos.writeBytes("MOVEPLAYER;" + type + '\n');
+					Screen.this.dos.writeBytes("MOVEPLAYER;" + type + '\n');
 				} catch (IOException e)
 				{
+					e.printStackTrace();
 				}
 		}
 

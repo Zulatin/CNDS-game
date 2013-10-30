@@ -89,7 +89,7 @@ public class Player
 	}
 	
 	void shotPlayer(){
-		point = point - 25;
+		point++;
 	}
 
 	public String getColor() {

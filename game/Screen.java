@@ -15,6 +15,7 @@ public class Screen extends JFrame
 	private JLabel[][] labels = new JLabel[20][20];
 	private String[][] level;
 	private DataOutputStream dos;
+	private ShootThread shootThread;
 
 	public Screen(String[][] level, DataOutputStream dos)
 	{
@@ -106,6 +107,7 @@ public class Screen extends JFrame
 			}
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE){
 				type = "shoot";
+				
 			}
 			// Press
 			if(type != null)

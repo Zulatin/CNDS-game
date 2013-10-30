@@ -67,14 +67,14 @@ public class IngoingServer extends Thread {
 						if (level[x][y].equals(wall)) {
 
 							// Take a point from player
-							player.subOnePoint();
+//							player.subOnePoint();
 							// Update scoreboard
 							Server.scoreList.updateScoreOnScreenAll();
 
 						} else {
 
 							// Give a point to player
-							player.addOnePoint();
+//							player.addOnePoint();
 							// Update scoreboard
 							Server.scoreList.updateScoreOnScreenAll();
 
@@ -101,9 +101,10 @@ public class IngoingServer extends Thread {
 					if (direction.equals("up")) {
 						y--;
 						boolean found = false;
-						int counter = 0;
+						
 
 						while (!found) {
+							int counter = 0;
 							if (!board[x][y].equals("w")) {
 								boolean playerFound = false;
 								while (!playerFound && counter < players.size()) {
@@ -112,16 +113,15 @@ public class IngoingServer extends Thread {
 											&& playerToShoot.getXpos() == x) {
 										playerFound = true;
 										found = true;
-										playerToShoot.shotPlayer();
+										player.shotPlayer();
 										playerToShoot.setXpos(5);
 										playerToShoot.setYpos(7);
 										writeToClient();
 									} else {
 										counter++;
 									}
-									counter = 0;
-									y = y - 1;
 								}
+								y = y - 1;
 							} else {
 								found = true;
 							}
@@ -136,27 +136,30 @@ public class IngoingServer extends Thread {
 						// y+1
 						y++;
 						boolean found = false;
-						int counter = 0;
+
 
 						while (!found) {
+							int counter = 0;
 							if (!board[x][y].equals("w")) {
+								
 								boolean playerFound = false;
-								Player playerToShoot = players.get(counter);
+								
 								while (!playerFound && counter < players.size()) {
+									Player playerToShoot = players.get(counter);
 									if (playerToShoot.getYpos() == y
 											&& playerToShoot.getXpos() == x) {
 										playerFound = true;
 										found = true;
-										playerToShoot.shotPlayer();
+										player.shotPlayer();
 										playerToShoot.setXpos(5);
 										playerToShoot.setYpos(7);
 										writeToClient();
 									} else {
 										counter++;
 									}
-									counter = 0;
-									y = y + 1;
+
 								}
+								y = y + 1;
 							} else {
 								found = true;
 							}
@@ -170,27 +173,29 @@ public class IngoingServer extends Thread {
 						// x-1
 						x--;
 						boolean found = false;
-						int counter = 0;
+						
 
 						while (!found) {
+							int counter = 0;
 							if (!board[x][y].equals("w")) {
 								boolean playerFound = false;
-								Player playerToShoot = players.get(counter);
+								
 								while (!playerFound && counter < players.size()) {
+									Player playerToShoot = players.get(counter);
 									if (playerToShoot.getYpos() == y
 											&& playerToShoot.getXpos() == x) {
 										playerFound = true;
 										found = true;
-										playerToShoot.shotPlayer();
+										player.shotPlayer();
 										playerToShoot.setXpos(5);
 										playerToShoot.setYpos(7);
 										writeToClient();
 									} else {
 										counter++;
 									}
-									counter = 0;
-									x = x - 1;
+									
 								}
+								x = x - 1;
 							} else {
 								found = true;
 							}
@@ -203,27 +208,29 @@ public class IngoingServer extends Thread {
 						// x+1
 						x++;
 						boolean found = false;
-						int counter = 0;
+						
 
 						while (!found) {
+							int counter = 0;
 							if (!board[x][y].equals("w")) {
 								boolean playerFound = false;
-								Player playerToShoot = players.get(counter);
+								
 								while (!playerFound && counter < players.size()) {
+									Player playerToShoot = players.get(counter);
 									if (playerToShoot.getYpos() == y
 											&& playerToShoot.getXpos() == x) {
 										playerFound = true;
 										found = true;
-										playerToShoot.shotPlayer();
+										player.shotPlayer();
 										playerToShoot.setXpos(5);
 										playerToShoot.setYpos(7);
 										writeToClient();
 									} else {
 										counter++;
 									}
-									counter = 0;
-									x = x + 1;
+									
 								}
+								x = x + 1;
 							} else {
 								found = true;
 							}

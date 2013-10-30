@@ -107,12 +107,11 @@ public class Screen extends JFrame
 			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE){
 				type = "shoot";
 			}
-
 			// Press
 			if(type != null)
 				try {
 					if (type.equals("shoot")){
-						dos.writeBytes("SHOOT;" + +'\n');
+						dos.writeBytes("SHOOT;" +'\n');
 					}
 					else
 					dos.writeBytes("MOVEPLAYER;" + type + '\n');

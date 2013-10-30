@@ -6,11 +6,6 @@ import java.util.ArrayList;
 public class IngoingServer extends Thread {
 	private Player player;
 	private String direction = "left", wall = "w", command = "";
-	private int x = player.getXpos();
-	private int y = player.getYpos();
-	private String[][] board = player.getBoard().getLevel();
-	ArrayList<Player> players = new ArrayList<Player>(player.getBoard()
-			.getPlayers());
 
 	public IngoingServer(Player player) {
 		this.player = player;
@@ -37,15 +32,23 @@ public class IngoingServer extends Thread {
 				// Split string from client
 				String[] message = getInFromClient.split(";");
 
+				int x = player.getXpos();
+				int y = player.getYpos();
+				String[][] board = player.getBoard().getLevel();
+				ArrayList<Player> players = new ArrayList<Player>(player
+						.getBoard().getPlayers());
+
 				// Find direction and command
 
 				command = message[0];
+			
 
 				if (command.equals("MOVEPLAYER")) {
 					direction = message[1];
 					if (direction != null) {
 						player.setDirection(direction);
-						int x = player.getXpos(), y = player.getYpos();
+						x = player.getXpos();
+						y = player.getYpos();
 
 						if (direction.equals("right")) {
 							x = player.getXpos() + 1;
@@ -83,170 +86,165 @@ public class IngoingServer extends Thread {
 
 						writeToClient();
 					}
+				}
+				if (command.equals("REMOVEPLAYER")) {
 
-					if (command.equals("REMOVEPLAYER")) {
+				}
+				if (command.equals("SHOOT")) {
+					System.out.println("command = shoot!");
+					direction = player.getDirection();
 
-					}
-					if (command.equals("SHOOT")) {
-						direction = player.getDirection();
+					// check x for other players, if found check if that
+					// players
+					// y coord is SMALLER
 
-						// check x for other players, if found check if that
-						// players
-						// y coord is SMALLER
+					if (direction.equals("up")) {
+						y--;
+						boolean found = false;
+						int counter = 0;
 
-						if (direction.equals("up")) {
-							y--;
-							boolean found = false;
-							int counter = 0;
-
-							while (!found) {
-								if (!board[x][y].equals("w")) {
-									boolean playerFound = false;
-									Player playerToShoot = players.get(counter);
-									while (!playerFound
-											&& counter < players.size()) {
-										if (playerToShoot.getYpos() == y
-												&& playerToShoot.getXpos() == x) {
-											playerFound = true;
-											found = true;
-											playerToShoot.shotPlayer();
-											playerToShoot.setXpos(5);
-											playerToShoot.setYpos(7);
-											writeToClient();
-										} else {
-											counter++;
-										}
-										counter = 0;
-										y = y - 1;
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										playerToShoot.shotPlayer();
+										playerToShoot.setXpos(5);
+										playerToShoot.setYpos(7);
+										writeToClient();
+									} else {
+										counter++;
 									}
-								} else {
-									found = true;
+									counter = 0;
+									y = y - 1;
 								}
+							} else {
+								found = true;
 							}
-
-						}
-
-						// check x for other players, if found check if that
-						// players
-						// y coord is BIGGER
-						if (direction.equals("down")) {
-							// y+1
-							y++;
-							boolean found = false;
-							int counter = 0;
-
-							while (!found) {
-								if (!board[x][y].equals("w")) {
-									boolean playerFound = false;
-									Player playerToShoot = players.get(counter);
-									while (!playerFound
-											&& counter < players.size()) {
-										if (playerToShoot.getYpos() == y
-												&& playerToShoot.getXpos() == x) {
-											playerFound = true;
-											found = true;
-											playerToShoot.shotPlayer();
-											playerToShoot.setXpos(5);
-											playerToShoot.setYpos(7);
-											writeToClient();
-										} else {
-											counter++;
-										}
-										counter = 0;
-										y = y + 1;
-									}
-								} else {
-									found = true;
-								}
-							}
-
-						}
-						// check y for other players, if found check if that
-						// players
-						// x coord is SMALLER
-						if (direction.equals("left")) {
-							// x-1
-							x--;
-							boolean found = false;
-							int counter = 0;
-
-							while (!found) {
-								if (!board[x][y].equals("w")) {
-									boolean playerFound = false;
-									Player playerToShoot = players.get(counter);
-									while (!playerFound
-											&& counter < players.size()) {
-										if (playerToShoot.getYpos() == y
-												&& playerToShoot.getXpos() == x) {
-											playerFound = true;
-											found = true;
-											playerToShoot.shotPlayer();
-											playerToShoot.setXpos(5);
-											playerToShoot.setYpos(7);
-											writeToClient();
-										} else {
-											counter++;
-										}
-										counter = 0;
-										x = x - 1;
-									}
-								} else {
-									found = true;
-								}
-							}
-						}
-						// check y for other players, if found check if that
-						// players
-						// y coord is BIGGER
-						if (direction.equals("right")) {
-							// x+1
-							x++;
-							boolean found = false;
-							int counter = 0;
-
-							while (!found) {
-								if (!board[x][y].equals("w")) {
-									boolean playerFound = false;
-									Player playerToShoot = players.get(counter);
-									while (!playerFound
-											&& counter < players.size()) {
-										if (playerToShoot.getYpos() == y
-												&& playerToShoot.getXpos() == x) {
-											playerFound = true;
-											found = true;
-											playerToShoot.shotPlayer();
-											playerToShoot.setXpos(5);
-											playerToShoot.setYpos(7);
-											writeToClient();
-										} else {
-											counter++;
-										}
-										counter = 0;
-										x = x + 1;
-									}
-								} else {
-									found = true;
-								}
-							}
-
 						}
 
 					}
+
+					// check x for other players, if found check if that
+					// players
+					// y coord is BIGGER
+					if (direction.equals("down")) {
+						// y+1
+						y++;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										playerToShoot.shotPlayer();
+										playerToShoot.setXpos(5);
+										playerToShoot.setYpos(7);
+										writeToClient();
+									} else {
+										counter++;
+									}
+									counter = 0;
+									y = y + 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+
+					}
+					// check y for other players, if found check if that
+					// players
+					// x coord is SMALLER
+					if (direction.equals("left")) {
+						// x-1
+						x--;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										playerToShoot.shotPlayer();
+										playerToShoot.setXpos(5);
+										playerToShoot.setYpos(7);
+										writeToClient();
+									} else {
+										counter++;
+									}
+									counter = 0;
+									x = x - 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+					}
+					// check y for other players, if found check if that
+					// players
+					// y coord is BIGGER
+					if (direction.equals("right")) {
+						// x+1
+						x++;
+						boolean found = false;
+						int counter = 0;
+
+						while (!found) {
+							if (!board[x][y].equals("w")) {
+								boolean playerFound = false;
+								Player playerToShoot = players.get(counter);
+								while (!playerFound && counter < players.size()) {
+									if (playerToShoot.getYpos() == y
+											&& playerToShoot.getXpos() == x) {
+										playerFound = true;
+										found = true;
+										playerToShoot.shotPlayer();
+										playerToShoot.setXpos(5);
+										playerToShoot.setYpos(7);
+										writeToClient();
+									} else {
+										counter++;
+									}
+									counter = 0;
+									x = x + 1;
+								}
+							} else {
+								found = true;
+							}
+						}
+
+					}
+
 				}
 			}
 		}
 	}
-	public void writeToClient(){
+
+	public void writeToClient() {
 		// Create toClient string
 		String toClient = "";
 
 		for (Player getPlayer : Server.players) {
-			toClient += getPlayer.getName() + ";"
-					+ getPlayer.getXpos() + ";"
-					+ getPlayer.getYpos() + ";"
-					+ getPlayer.getPoint() + ";"
-					+ getPlayer.getDirection() + ";"
-					+ getPlayer.getColor() + ";";
+			toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";"
+					+ getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";"
+					+ getPlayer.getDirection() + ";" + getPlayer.getColor()
+					+ ";";
 		}
 
 		try {

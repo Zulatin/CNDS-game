@@ -23,7 +23,7 @@ public class ScoreList extends JFrame
 		this.setLayout(new GridLayout(20, 20, 0, 0));
 		this.setVisible(true);
 		this.players = players;
-		draw();
+		this.draw();
 		this.setAlwaysOnTop(true);
 	}
 
@@ -34,41 +34,41 @@ public class ScoreList extends JFrame
 
 	public void draw()
 	{
-		for (int j = 0; j < players.size(); j++)
+		for (int j = 0; j < this.players.size(); j++)
 		{
-			JLabel l = new JLabel(players.get(j).ToString());
+			JLabel l = new JLabel(this.players.get(j).toString());
 			l.setSize(50, 200);
 			this.add(l);
-			labels.add(l);
+			this.labels.add(l);
 		}
 	}
 
 	public void updateScoreOnScreenAll()
 	{
-		if (players.size() > labels.size())
+		if (this.players.size() > this.labels.size())
 		{
 			// new players
-			for (int j = labels.size(); j < players.size(); j++)
+			for (int j = this.labels.size(); j < this.players.size(); j++)
 			{
-				JLabel l = new JLabel(players.get(j).ToString());
+				JLabel l = new JLabel(this.players.get(j).toString());
 				l.setSize(50, 200);
 				this.add(l);
-				labels.add(l);
+				this.labels.add(l);
 			}
 		}
-		if (players.size() < labels.size())
+		if (this.players.size() < this.labels.size())
 		{
 			// players left game
-			for (int j = labels.size(); j > players.size(); j--)
+			for (int j = this.labels.size(); j > this.players.size(); j--)
 			{
-				JLabel lbl = labels.remove(j - 1);
+				JLabel lbl = this.labels.remove(j - 1);
 				this.remove(lbl);
 				this.repaint();
 			}
 		}
-		for (int j = 0; j < players.size(); j++)
+		for (int j = 0; j < this.players.size(); j++)
 		{
-			labels.get((j)).setText(players.get(j).ToString());
+			this.labels.get((j)).setText(this.players.get(j).toString());
 		}
 	}
 }

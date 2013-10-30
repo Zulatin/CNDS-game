@@ -32,76 +32,93 @@ public class Player
 		this.name = name;
 	}
 
-	public Gameplayer getBoard() {
-		return board;
+	public Gameplayer getBoard()
+	{
+		return this.board;
 	}
 
-	public int getPoint() {
-		return point;
+	public int getPoint()
+	{
+		return this.point;
 	}
 
-	public int getXpos() {
-		return xpos;
+	public int getXpos()
+	{
+		return this.xpos;
 	}
 
-	public void setXpos(int xpos) {
+	public void setXpos(int xpos)
+	{
 		this.xpos = xpos;
 	}
 
-	public int getYpos() {
-		return ypos;
+	public int getYpos()
+	{
+		return this.ypos;
 	}
 
-	public void setYpos(int ypos) {
+	public void setYpos(int ypos)
+	{
 		this.ypos = ypos;
 	}
 
-	public String getDirection() {
-		return direction;
+	public String getDirection()
+	{
+		return this.direction;
 	}
 
-	public void setDirection(String direction) {
+	public void setDirection(String direction)
+	{
 		this.direction = direction;
 	}
 
-	public String getName() {
-		return name;
+	public String getName()
+	{
+		return this.name;
 	}
 
-	public BufferedReader getInFromClient() {
-		return inFromClient;
+	public BufferedReader getInFromClient()
+	{
+		return this.inFromClient;
 	}
 
-	public DataOutputStream getOutToClient() {
-		return outToClient;
+	public DataOutputStream getOutToClient()
+	{
+		return this.outToClient;
 	}
 
-	String ToString() {
-		return name + "   " + point;
+	public String toString()
+	{
+		return this.name + "   " + this.point;
 	}
 
-	void addOnePoint() {
-		point++;
+	void addOnePoint()
+	{
+		this.point++;
 	}
 
-	void subOnePoint() {
-		point--;
-	}
-	
-	void shotPlayer(){
-		point++;
+	void subOnePoint()
+	{
+		this.point--;
 	}
 
-	public String getColor() {
-		return color;
+	void shotPlayer()
+	{
+		this.point++;
 	}
 
-	public void setColor(String color) {
+	public String getColor()
+	{
+		return this.color;
+	}
+
+	public void setColor(String color)
+	{
 		this.color = color;
 	}
 
 	public synchronized void output(String toClient) throws IOException
 	{
-		outToClient.writeBytes(toClient + '\n');
+		this.outToClient.writeBytes(toClient + '\n');
 	}
 }

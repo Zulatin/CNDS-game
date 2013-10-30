@@ -27,7 +27,7 @@ public class IngoingServer extends Thread
 	{
 		while (true)
 		{
-			Server.scoreList.draw();
+			
 			String getInFromClient = null;
 			try
 			{
@@ -61,7 +61,8 @@ public class IngoingServer extends Thread
 
 				// Start players
 				ArrayList<Player> players = new ArrayList<Player>(this.player.getBoard().getPlayers());
-
+				Server.scoreList.draw();
+				Server.scoreList.updateScoreOnScreenAll();
 				// Find direction and command
 				this.command = message[0];
 
@@ -100,7 +101,7 @@ public class IngoingServer extends Thread
 							// player.subOnePoint();
 
 							// Update scoreboard
-							Server.scoreList.updateScoreOnScreenAll();
+							
 
 						}
 						else

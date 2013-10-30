@@ -27,6 +27,7 @@ public class IngoingServer extends Thread
 	{
 		while (true)
 		{
+			Server.scoreList.draw();
 			String getInFromClient = null;
 			try
 			{

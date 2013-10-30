@@ -106,8 +106,8 @@ public class IngoingServer extends Thread {
 						while (!found) {
 							if (!board[x][y].equals("w")) {
 								boolean playerFound = false;
-								Player playerToShoot = players.get(counter);
 								while (!playerFound && counter < players.size()) {
+									Player playerToShoot = players.get(counter);
 									if (playerToShoot.getYpos() == y
 											&& playerToShoot.getXpos() == x) {
 										playerFound = true;

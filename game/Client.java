@@ -37,7 +37,7 @@ public class Client extends JFrame
 
 	public Client() throws Exception
 	{
-		this.setBounds(400, 400, 480, 66);
+		this.setBounds(400, 400, 480, 60);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.getContentPane().setLayout(new GridLayout(1, 0, 0, 0));

@@ -2,10 +2,15 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
 public class IngoingServer extends Thread
@@ -133,6 +138,18 @@ public class IngoingServer extends Thread
 				{
 					if (this.permissionToShoot)
 					{
+						try {
+							this.ShootSound();
+						} catch (LineUnavailableException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (UnsupportedAudioFileException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						this.direction = this.player.getDirection();
 
 						// check x for other players, if found check if that
@@ -363,6 +380,12 @@ public class IngoingServer extends Thread
 
 			}
 		}
+	}
+
+	private void ShootSound() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+		Clip clip2 = AudioSystem.getClip();
+		clip2.open(AudioSystem.getAudioInputStream(new File("./Sound/gunShot.wav")));
+		clip2.start();
 	}
 
 	public void writeToClient()

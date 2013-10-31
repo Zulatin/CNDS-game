@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JButton;
@@ -118,6 +119,7 @@ public class Client extends JFrame
 			clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.start();
+			
 
 			// IngoingClient needs gameplayer to make changes
 			IngoingClient inThread = new IngoingClient(inFromServer, game, screen);

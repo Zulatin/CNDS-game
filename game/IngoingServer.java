@@ -13,46 +13,37 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Timer;
 
-public class IngoingServer extends Thread
-{
+public class IngoingServer extends Thread {
 	private Player player;
 	private String direction = "left", wall = "w", command = "";
 	private Timer timer;
 	private boolean permissionToShoot;
 	private Random random;
 
-	public IngoingServer(Player player)
-	{
+	public IngoingServer(Player player) {
 		this.player = player;
 		this.permissionToShoot = true;
 		this.random = new Random();
 	}
 
-	public void run()
-	{
-		while (true)
-		{
+	public void run() {
+		while (true) {
 
 			String getInFromClient = null;
-			try
-			{
+			try {
 				getInFromClient = this.player.getInFromClient().readLine();
-			} catch (IOException e1)
-			{
+			} catch (IOException e1) {
 			}
 
 			// Check if getInFromClient
-			if (getInFromClient == null)
-			{
+			if (getInFromClient == null) {
 
 				// Close thread
 				Thread.currentThread().interrupt();
 				Server.players.remove(this.player);
 				return;
 
-			}
-			else
-			{
+			} else {
 
 				// Split string from client
 				String[] message = getInFromClient.split(";");
@@ -65,41 +56,35 @@ public class IngoingServer extends Thread
 				String[][] board = this.player.getBoard().getLevel();
 
 				// Start players
-				ArrayList<Player> players = new ArrayList<Player>(this.player.getBoard().getPlayers());
+				ArrayList<Player> players = new ArrayList<Player>(this.player
+						.getBoard().getPlayers());
 
 				// Find direction and command
 				this.command = message[0];
 
 				// Go in here if command is moveplayer
-				if (this.command.equals("MOVEPLAYER"))
-				{
+				if (this.command.equals("MOVEPLAYER")) {
 					this.direction = message[1];
-					if (this.direction != null)
-					{
+					if (this.direction != null) {
 						this.player.setDirection(this.direction);
 						x = this.player.getXpos();
 						y = this.player.getYpos();
 
-						if (this.direction.equals("right"))
-						{
+						if (this.direction.equals("right")) {
 							x = this.player.getXpos() + 1;
 						}
-						if (this.direction.equals("left"))
-						{
+						if (this.direction.equals("left")) {
 							x = this.player.getXpos() - 1;
 						}
-						if (this.direction.equals("up"))
-						{
+						if (this.direction.equals("up")) {
 							y = this.player.getYpos() - 1;
 						}
-						if (this.direction.equals("down"))
-						{
+						if (this.direction.equals("down")) {
 							y = this.player.getYpos() + 1;
 						}
 
 						String[][] level = this.player.getBoard().getLevel();
-						if (level[x][y].equals(this.wall))
-						{
+						if (level[x][y].equals(this.wall)) {
 
 							// Take a point from player
 							// player.subOnePoint();
@@ -107,9 +92,7 @@ public class IngoingServer extends Thread
 							// Update scoreboard
 							// Server.scoreList.updateScoreOnScreenAll();
 
-						}
-						else
-						{
+						} else {
 
 							// Give a point to player
 							// player.addOnePoint();
@@ -129,15 +112,12 @@ public class IngoingServer extends Thread
 				}
 
 				// REMOVEPLAYER
-				if (this.command.equals("REMOVEPLAYER"))
-				{
+				if (this.command.equals("REMOVEPLAYER")) {
 				}
 
 				// Shoot
-				if (this.command.equals("SHOOT"))
-				{
-					if (this.permissionToShoot)
-					{
+				if (this.command.equals("SHOOT")) {
+					if (this.permissionToShoot) {
 						try {
 							this.ShootSound();
 						} catch (LineUnavailableException e) {
@@ -156,46 +136,48 @@ public class IngoingServer extends Thread
 						// players
 						// y coord is SMALLER
 
-						if (this.direction.equals("up"))
-						{
+						if (this.direction.equals("up")) {
 							y--;
 							boolean found = false;
 
-							while (!found)
-							{
+							while (!found) {
 								int counter = 0;
-								if (!board[x][y].equals("w"))
-								{
+								if (!board[x][y].equals("w")) {
 									boolean playerFound = false;
-									while (!playerFound && counter < players.size())
-									{
-										Player playerToShoot = players.get(counter);
-										if (playerToShoot.getYpos() == y && playerToShoot.getXpos() == x)
-										{
+									while (!playerFound
+											&& counter < players.size()) {
+										Player playerToShoot = players
+												.get(counter);
+										if (playerToShoot.getYpos() == y
+												&& playerToShoot.getXpos() == x) {
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
 											int ranX = this.random.nextInt(20);
 											int ranY = this.random.nextInt(20);
-											String[][] level = this.player.getBoard().getLevel();
-											while (level[ranX][ranY].equals("w"))
-											{
+											String[][] level = this.player
+													.getBoard().getLevel();
+											while (level[ranX][ranY]
+													.equals("w")) {
 												ranX = this.random.nextInt(20);
 												ranY = this.random.nextInt(20);
+												try {
+													dieShoud();
+												} catch (LineUnavailableException e) {
+												} catch (IOException e) {
+												} catch (UnsupportedAudioFileException e) {
+												}
+												;
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
 											this.writeToClient();
-										}
-										else
-										{
+										} else {
 											counter++;
 										}
 									}
 									y = y - 1;
-								}
-								else
-								{
+								} else {
 									found = true;
 								}
 							}
@@ -205,50 +187,52 @@ public class IngoingServer extends Thread
 						// check x for other players, if found check if that
 						// players
 						// y coord is BIGGER
-						if (this.direction.equals("down"))
-						{
+						if (this.direction.equals("down")) {
 							// y+1
 							y++;
 							boolean found = false;
 
-							while (!found)
-							{
+							while (!found) {
 								int counter = 0;
-								if (!board[x][y].equals("w"))
-								{
+								if (!board[x][y].equals("w")) {
 
 									boolean playerFound = false;
 
-									while (!playerFound && counter < players.size())
-									{
-										Player playerToShoot = players.get(counter);
-										if (playerToShoot.getYpos() == y && playerToShoot.getXpos() == x)
-										{
+									while (!playerFound
+											&& counter < players.size()) {
+										Player playerToShoot = players
+												.get(counter);
+										if (playerToShoot.getYpos() == y
+												&& playerToShoot.getXpos() == x) {
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
 											int ranX = this.random.nextInt(20);
 											int ranY = this.random.nextInt(20);
-											String[][] level = this.player.getBoard().getLevel();
-											while (level[ranX][ranY].equals("w"))
-											{
+											String[][] level = this.player
+													.getBoard().getLevel();
+											while (level[ranX][ranY]
+													.equals("w")) {
 												ranX = this.random.nextInt(20);
 												ranY = this.random.nextInt(20);
+												try {
+													dieShoud();
+												} catch (LineUnavailableException e) {
+												} catch (IOException e) {
+												} catch (UnsupportedAudioFileException e) {
+												}
+												;
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
 											this.writeToClient();
-										}
-										else
-										{
+										} else {
 											counter++;
 										}
 
 									}
 									y = y + 1;
-								}
-								else
-								{
+								} else {
 									found = true;
 								}
 							}
@@ -257,49 +241,50 @@ public class IngoingServer extends Thread
 						// check y for other players, if found check if that
 						// players
 						// x coord is SMALLER
-						if (this.direction.equals("left"))
-						{
+						if (this.direction.equals("left")) {
 							// x-1
 							x--;
 							boolean found = false;
 
-							while (!found)
-							{
+							while (!found) {
 								int counter = 0;
-								if (!board[x][y].equals("w"))
-								{
+								if (!board[x][y].equals("w")) {
 									boolean playerFound = false;
 
-									while (!playerFound && counter < players.size())
-									{
-										Player playerToShoot = players.get(counter);
-										if (playerToShoot.getYpos() == y && playerToShoot.getXpos() == x)
-										{
+									while (!playerFound
+											&& counter < players.size()) {
+										Player playerToShoot = players
+												.get(counter);
+										if (playerToShoot.getYpos() == y
+												&& playerToShoot.getXpos() == x) {
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
 											int ranX = this.random.nextInt(20);
 											int ranY = this.random.nextInt(20);
-											String[][] level = this.player.getBoard().getLevel();
-											while (level[ranX][ranY].equals("w"))
-											{
+											String[][] level = this.player
+													.getBoard().getLevel();
+											while (level[ranX][ranY]
+													.equals("w")) {
 												ranX = this.random.nextInt(20);
 												ranY = this.random.nextInt(20);
+												try {
+													dieShoud();
+												} catch (LineUnavailableException e) {
+												} catch (IOException e) {
+												} catch (UnsupportedAudioFileException e) {
+												}
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
 											this.writeToClient();
-										}
-										else
-										{
+										} else {
 											counter++;
 										}
 
 									}
 									x = x - 1;
-								}
-								else
-								{
+								} else {
 									found = true;
 								}
 							}
@@ -307,49 +292,50 @@ public class IngoingServer extends Thread
 						// check y for other players, if found check if that
 						// players
 						// y coord is BIGGER
-						if (this.direction.equals("right"))
-						{
+						if (this.direction.equals("right")) {
 							// x+1
 							x++;
 							boolean found = false;
 
-							while (!found)
-							{
+							while (!found) {
 								int counter = 0;
-								if (!board[x][y].equals("w"))
-								{
+								if (!board[x][y].equals("w")) {
 									boolean playerFound = false;
 
-									while (!playerFound && counter < players.size())
-									{
-										Player playerToShoot = players.get(counter);
-										if (playerToShoot.getYpos() == y && playerToShoot.getXpos() == x)
-										{
+									while (!playerFound
+											&& counter < players.size()) {
+										Player playerToShoot = players
+												.get(counter);
+										if (playerToShoot.getYpos() == y
+												&& playerToShoot.getXpos() == x) {
 											playerFound = true;
 											found = true;
 											this.player.shotPlayer();
 											int ranX = this.random.nextInt(20);
 											int ranY = this.random.nextInt(20);
-											String[][] level = this.player.getBoard().getLevel();
-											while (level[ranX][ranY].equals("w"))
-											{
+											String[][] level = this.player
+													.getBoard().getLevel();
+											while (level[ranX][ranY]
+													.equals("w")) {
 												ranX = this.random.nextInt(20);
 												ranY = this.random.nextInt(20);
+												try {
+													dieShoud();
+												} catch (LineUnavailableException e) {
+												} catch (IOException e) {
+												} catch (UnsupportedAudioFileException e) {
+												}
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
 											this.writeToClient();
-										}
-										else
-										{
+										} else {
 											counter++;
 										}
 
 									}
 									x = x + 1;
-								}
-								else
-								{
+								} else {
 									found = true;
 								}
 							}
@@ -359,11 +345,9 @@ public class IngoingServer extends Thread
 						int delay = 1000;
 						this.permissionToShoot = false;
 
-						ActionListener taskPerform = new ActionListener()
-						{
+						ActionListener taskPerform = new ActionListener() {
 							@Override
-							public void actionPerformed(ActionEvent arg0)
-							{
+							public void actionPerformed(ActionEvent arg0) {
 								IngoingServer.this.permissionToShoot = true;
 							}
 						};
@@ -382,29 +366,38 @@ public class IngoingServer extends Thread
 		}
 	}
 
-	private void ShootSound() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+	private void ShootSound() throws LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
 		Clip clip2 = AudioSystem.getClip();
-		clip2.open(AudioSystem.getAudioInputStream(new File("./Sound/gunShot.wav")));
+		clip2.open(AudioSystem.getAudioInputStream(new File(
+				"./Sound/gunShot.wav")));
 		clip2.start();
 	}
 
-	public void writeToClient()
-	{
+	private void dieShoud() throws LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
+		Clip clip2 = AudioSystem.getClip();
+		clip2.open(AudioSystem
+				.getAudioInputStream(new File("./Sound/GodLike.wav")));
+		clip2.start();
+	}
+
+	public void writeToClient() {
 		// Create toClient string
 		String toClient = "";
 
-		for (Player getPlayer : Server.players)
-		{
-			toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";" + getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";" + getPlayer.getDirection() + ";" + getPlayer.getColor() + ";";
+		for (Player getPlayer : Server.players) {
+			toClient += getPlayer.getName() + ";" + getPlayer.getXpos() + ";"
+					+ getPlayer.getYpos() + ";" + getPlayer.getPoint() + ";"
+					+ getPlayer.getDirection() + ";" + getPlayer.getColor()
+					+ ";";
 		}
 
-		try
-		{
+		try {
 			// For-each players and write players to them
 			for (Player getPlayers : Server.players)
 				getPlayers.output(toClient);
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 

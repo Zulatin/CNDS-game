@@ -167,7 +167,6 @@ public class IngoingServer extends Thread {
 												} catch (IOException e) {
 												} catch (UnsupportedAudioFileException e) {
 												}
-												;
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -221,7 +220,6 @@ public class IngoingServer extends Thread {
 												} catch (IOException e) {
 												} catch (UnsupportedAudioFileException e) {
 												}
-												;
 											}
 											playerToShoot.setXpos(ranX);
 											playerToShoot.setYpos(ranY);
@@ -377,8 +375,7 @@ public class IngoingServer extends Thread {
 	private void dieShoud() throws LineUnavailableException, IOException,
 			UnsupportedAudioFileException {
 		Clip clip2 = AudioSystem.getClip();
-		clip2.open(AudioSystem
-				.getAudioInputStream(new File("./Sound/GodLike.wav")));
+		clip2.open(AudioSystem.getAudioInputStream(new File("./Sound/HolyShit.wav")));
 		clip2.start();
 	}
 

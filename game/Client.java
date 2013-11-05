@@ -81,13 +81,15 @@ public class Client extends JFrame
 		String response = inFromServer.readLine();
 
 		// If server is not full
-		if (!response.equals("SERVERFULL")) {
+		if (!response.equals("SERVERFULL"))
+		{
 			int index = 0;
 			String[] settings = response.split(";");
 			ArrayList<Player> players = new ArrayList<Player>();
 
 			// Run through players from server
-			for (; index < settings.length; index += 6) {
+			for (; index < settings.length; index += 6)
+			{
 				Player p = new Player(settings[index], Integer.parseInt(settings[index + 3]));
 				p.setXpos(Integer.parseInt(settings[index + 1]));
 				p.setYpos(Integer.parseInt(settings[index + 2]));
@@ -107,7 +109,8 @@ public class Client extends JFrame
 			screen.setVisible(true);
 
 			// Draw players
-			for (Player player : players) {
+			for (Player player : players)
+			{
 				screen.drawPlayer(player);
 			}
 
@@ -124,7 +127,8 @@ public class Client extends JFrame
 
 			// Shizzle on the thread
 			inThread.start();
-		} else {
+		} else
+		{
 			// Close connection
 			clientSocket.close();
 
@@ -138,10 +142,13 @@ public class Client extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent ae)
 		{
-			if (ae.getSource().equals(Client.this.btnConnect)) {
-				try {
+			if (ae.getSource().equals(Client.this.btnConnect))
+			{
+				try
+				{
 					Client.this.login(Client.this.txtIp.getText(), Client.this.txtUsername.getText());
-				} catch (Exception e) {
+				} catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}

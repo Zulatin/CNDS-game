@@ -39,8 +39,7 @@ public class Server
 			{
 				// Check player
 				checkPlayer(inFromClient.readLine(), inFromClient, outToClient);
-			}
-			else
+			} else
 			{
 				outToClient.writeBytes("SERVERFULL\n");
 			}

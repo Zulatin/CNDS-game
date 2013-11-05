@@ -47,8 +47,7 @@ public class Screen extends JFrame
 					l.setSize(50, 50);
 					this.add(l);
 					this.labels[i][j] = l;
-				}
-				else if (this.level[i][j].equalsIgnoreCase("e"))
+				} else if (this.level[i][j].equalsIgnoreCase("e"))
 				{
 					JLabel l = new JLabel(new ImageIcon("./Image/BubbleFloor.png"));
 					l.setSize(50, 50);
@@ -109,23 +108,19 @@ public class Screen extends JFrame
 			{
 				command = "MOVEPLAYER";
 				type = "up";
-			}
-			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
+			} else if (theKeyEvent.getKeyCode() == KeyEvent.VK_DOWN)
 			{
 				command = "MOVEPLAYER";
 				type = "down";
-			}
-			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
+			} else if (theKeyEvent.getKeyCode() == KeyEvent.VK_LEFT)
 			{
 				command = "MOVEPLAYER";
 				type = "left";
-			}
-			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
+			} else if (theKeyEvent.getKeyCode() == KeyEvent.VK_RIGHT)
 			{
 				command = "MOVEPLAYER";
 				type = "right";
-			}
-			else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE)
+			} else if (theKeyEvent.getKeyCode() == KeyEvent.VK_SPACE)
 			{
 				command = "SHOOT";
 			}

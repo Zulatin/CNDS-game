@@ -40,8 +40,7 @@ public class IngoingClient extends Thread
 				this.screen.connectionClosed(true);
 				return;
 
-			}
-			else
+			} else
 			{
 
 				String sentence = getInFromServer;

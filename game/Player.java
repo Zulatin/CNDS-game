@@ -121,8 +121,9 @@ public class Player
 	{
 		this.outToClient.writeBytes(toClient + '\n');
 	}
-	
-	public void resetScore(){
+
+	public void resetScore()
+	{
 		this.point = 0;
 	}
 }

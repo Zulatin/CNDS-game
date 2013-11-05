@@ -185,7 +185,7 @@ public class IngoingServer extends Thread
 
 												try
 												{
-													dieShoud();
+													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
 													e.printStackTrace();
@@ -241,7 +241,7 @@ public class IngoingServer extends Thread
 												ranY = this.random.nextInt(20);
 												try
 												{
-													dieShoud();
+													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
 													e.printStackTrace();
@@ -297,7 +297,7 @@ public class IngoingServer extends Thread
 												ranY = this.random.nextInt(20);
 												try
 												{
-													dieShoud();
+													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
 													e.printStackTrace();
@@ -353,7 +353,7 @@ public class IngoingServer extends Thread
 												ranY = this.random.nextInt(20);
 												try
 												{
-													dieShoud();
+													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
 													e.printStackTrace();
@@ -409,7 +409,7 @@ public class IngoingServer extends Thread
 		clip.start();
 	}
 
-	private void dieShoud() throws LineUnavailableException, IOException, UnsupportedAudioFileException
+	private void dieSound() throws LineUnavailableException, IOException, UnsupportedAudioFileException
 	{
 		Clip clip = AudioSystem.getClip();
 		clip.open(AudioSystem.getAudioInputStream(new File("./Sound/Combowhore.wav")));

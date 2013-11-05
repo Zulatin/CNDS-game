@@ -9,8 +9,6 @@ import javax.swing.JLabel;
 public class ScoreList extends JFrame
 {
 	ArrayList<Player> players;
-
-	// Player me;
 	private ArrayList<JLabel> labels = new ArrayList<JLabel>();
 
 	public ScoreList(ArrayList<Player> players)
@@ -29,7 +27,6 @@ public class ScoreList extends JFrame
 
 	public void setPlayers(ArrayList<Player> players)
 	{
-		// this.labels = null;
 		this.players = players;
 	}
 
@@ -49,7 +46,7 @@ public class ScoreList extends JFrame
 	{
 		if (this.players.size() > this.labels.size())
 		{
-			// new players
+			// New players
 			for (int j = this.labels.size(); j < this.players.size(); j++)
 			{
 				JLabel l = new JLabel(this.players.get(j).toString());
@@ -60,7 +57,7 @@ public class ScoreList extends JFrame
 		}
 		if (this.players.size() < this.labels.size())
 		{
-			// players left game
+			// Players left game
 			for (int j = this.labels.size(); j > this.players.size(); j--)
 			{
 				JLabel lbl = this.labels.remove(j - 1);
@@ -71,14 +68,6 @@ public class ScoreList extends JFrame
 		for (int j = 0; j < this.players.size(); j++)
 		{
 			this.labels.get((j)).setText(this.players.get(j).toString());
-		}
-	}
-
-	public void nulstilListe()
-	{
-		for (Player p : this.players)
-		{
-			p.resetScore();
 		}
 	}
 }

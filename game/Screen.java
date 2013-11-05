@@ -43,13 +43,13 @@ public class Screen extends JFrame
 			{
 				if (this.level[i][j].equalsIgnoreCase("w"))
 				{
-					JLabel l = new JLabel(new ImageIcon("./Image/BubbleWall.png"));
+					JLabel l = new JLabel(new ImageIcon("./Image/bubble/BubbleWall.png"));
 					l.setSize(50, 50);
 					this.add(l);
 					this.labels[i][j] = l;
 				} else if (this.level[i][j].equalsIgnoreCase("e"))
 				{
-					JLabel l = new JLabel(new ImageIcon("./Image/BubbleFloor.png"));
+					JLabel l = new JLabel(new ImageIcon("./Image/bubble/BubbleFloor.png"));
 					l.setSize(50, 50);
 					this.add(l);
 					this.labels[i][j] = l;
@@ -84,7 +84,7 @@ public class Screen extends JFrame
 
 	public void undrawPlayer(Player player)
 	{
-		this.labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/BubbleFloor.png"));
+		this.labels[player.getXpos()][player.getYpos()].setIcon(new ImageIcon("./Image/bubble/BubbleFloor.png"));
 	}
 
 	public void connectionClosed(boolean closed)

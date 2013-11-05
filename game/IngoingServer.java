@@ -39,6 +39,7 @@ public class IngoingServer extends Thread
 				getInFromClient = this.player.getInFromClient().readLine();
 			} catch (IOException e1)
 			{
+				System.out.println("Whoa, client lost connection.....");
 			}
 
 			// Check if getInFromClient
@@ -148,7 +149,7 @@ public class IngoingServer extends Thread
 							this.ShootSound();
 						} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e1)
 						{
-							e1.printStackTrace();
+							System.out.println("Sound didnt play");
 						}
 
 						this.direction = this.player.getDirection();
@@ -181,13 +182,12 @@ public class IngoingServer extends Thread
 											{
 												ranX = this.random.nextInt(20);
 												ranY = this.random.nextInt(20);
-
 												try
 												{
 													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
-													e.printStackTrace();
+													System.out.println("Sound didnt play");
 												}
 											}
 											playerToShoot.setXpos(ranX);
@@ -240,7 +240,7 @@ public class IngoingServer extends Thread
 													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
-													e.printStackTrace();
+													System.out.println("Sound didnt play");
 												}
 											}
 											playerToShoot.setXpos(ranX);
@@ -294,7 +294,7 @@ public class IngoingServer extends Thread
 													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
-													e.printStackTrace();
+													System.out.println("Sound didnt play");
 												}
 											}
 											playerToShoot.setXpos(ranX);
@@ -348,7 +348,7 @@ public class IngoingServer extends Thread
 													dieSound();
 												} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e)
 												{
-													e.printStackTrace();
+													System.out.println("Sound didnt play");
 												}
 											}
 											playerToShoot.setXpos(ranX);
@@ -425,7 +425,7 @@ public class IngoingServer extends Thread
 				getPlayers.output(toClient);
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			System.out.println("Couldnt send players to some client....");
 		}
 
 	}

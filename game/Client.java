@@ -32,7 +32,6 @@ public class Client extends JFrame
 
 	public static void main(String[] args) throws Exception
 	{
-		// Client c = new Client();
 		new Client().setVisible(true);
 	}
 

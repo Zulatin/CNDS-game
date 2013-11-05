@@ -28,6 +28,7 @@ public class IngoingClient extends Thread
 				getInFromServer = this.inFromServer.readLine();
 			} catch (IOException e)
 			{
+				System.out.println("Whoa, server lost connection.....");
 			}
 
 			// Check if getInFromClient
@@ -49,8 +50,7 @@ public class IngoingClient extends Thread
 					String[] boardUpdate = sentence.split(";");
 					ArrayList<Player> players = new ArrayList<Player>();
 
-					// Find names, positions, direction and color from
-					// server
+					// Find names, positions, direction and color from server
 					for (int i = 0; i < boardUpdate.length - 4; i += 6)
 					{
 						Player p = new Player(boardUpdate[i], Integer.parseInt(boardUpdate[i + 3]));
@@ -64,6 +64,7 @@ public class IngoingClient extends Thread
 					// Reset board
 					for (Player getPlayer : this.game.players)
 					{
+						// By undrawning this player
 						this.screen.undrawPlayer(getPlayer);
 					}
 
@@ -71,7 +72,7 @@ public class IngoingClient extends Thread
 					this.game.scoreList.setPlayers(players);
 					this.game.scoreList.updateScoreOnScreenAll();
 
-					// Setup new board
+					// Give gameplay a new player setup
 					this.game.players = players;
 
 					// For-each players

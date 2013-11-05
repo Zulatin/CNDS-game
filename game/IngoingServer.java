@@ -160,7 +160,6 @@ public class IngoingServer extends Thread
 						{
 							y--;
 							boolean found = false;
-
 							while (!found)
 							{
 								int counter = 0;
@@ -215,15 +214,12 @@ public class IngoingServer extends Thread
 							// y+1
 							y++;
 							boolean found = false;
-
 							while (!found)
 							{
 								int counter = 0;
 								if (!board[x][y].equals("w"))
 								{
-
 									boolean playerFound = false;
-
 									while (!playerFound && counter < players.size())
 									{
 										Player playerToShoot = players.get(counter);
@@ -272,14 +268,12 @@ public class IngoingServer extends Thread
 							// x-1
 							x--;
 							boolean found = false;
-
 							while (!found)
 							{
 								int counter = 0;
 								if (!board[x][y].equals("w"))
 								{
 									boolean playerFound = false;
-
 									while (!playerFound && counter < players.size())
 									{
 										Player playerToShoot = players.get(counter);
@@ -328,14 +322,12 @@ public class IngoingServer extends Thread
 							// x+1
 							x++;
 							boolean found = false;
-
 							while (!found)
 							{
 								int counter = 0;
 								if (!board[x][y].equals("w"))
 								{
 									boolean playerFound = false;
-
 									while (!playerFound && counter < players.size())
 									{
 										Player playerToShoot = players.get(counter);

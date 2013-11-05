@@ -156,7 +156,6 @@ public class IngoingServer extends Thread
 						// check x for other players, if found check if that
 						// players
 						// y coord is SMALLER
-
 						if (this.direction.equals("up"))
 						{
 							y--;
@@ -206,7 +205,6 @@ public class IngoingServer extends Thread
 									found = true;
 								}
 							}
-
 						}
 
 						// check x for other players, if found check if that
@@ -264,8 +262,8 @@ public class IngoingServer extends Thread
 									found = true;
 								}
 							}
-
 						}
+
 						// check y for other players, if found check if that
 						// players
 						// x coord is SMALLER
@@ -321,6 +319,7 @@ public class IngoingServer extends Thread
 								}
 							}
 						}
+
 						// check y for other players, if found check if that
 						// players
 						// y coord is BIGGER
@@ -375,7 +374,6 @@ public class IngoingServer extends Thread
 									found = true;
 								}
 							}
-
 						}
 
 						int delay = 1000;

@@ -375,7 +375,7 @@ public class IngoingServer extends Thread {
 	private void dieShoud() throws LineUnavailableException, IOException,
 			UnsupportedAudioFileException {
 		Clip clip2 = AudioSystem.getClip();
-		clip2.open(AudioSystem.getAudioInputStream(new File("./Sound/HolyShit.wav")));
+		clip2.open(AudioSystem.getAudioInputStream(new File("./Sound/Combowhore.wav")));
 		clip2.start();
 	}
 

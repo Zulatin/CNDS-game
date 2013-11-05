@@ -115,10 +115,10 @@ public class Client extends JFrame
 			}
 
 			// Start sound
-//			Clip clip = AudioSystem.getClip();
-//			clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
-//			clip.loop(Clip.LOOP_CONTINUOUSLY);
-//			clip.start();
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(new File("./Sound/sound.wav")));
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
 			
 
 			// IngoingClient needs gameplayer to make changes

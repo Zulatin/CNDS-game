@@ -43,7 +43,7 @@ public class Screen extends JFrame
 			{
 				if (this.level[i][j].equalsIgnoreCase("w"))
 				{
-					JLabel l = new JLabel(new ImageIcon("./Image/BubbleWall2.png"));
+					JLabel l = new JLabel(new ImageIcon("./Image/BubbleWall.png"));
 					l.setSize(50, 50);
 					this.add(l);
 					this.labels[i][j] = l;
